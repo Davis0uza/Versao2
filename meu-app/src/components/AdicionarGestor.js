@@ -68,7 +68,7 @@ function AdicionarGestor() {
     <div>
       <MenuLateral />
       <div style={{ marginLeft: '260px', padding: '20px' }}>
-        <h1>Adicionar Gestor</h1>
+        <h1>Adicionar Gestores</h1>
         <ul>
           {usuarios.filter(usuario => !usuario.id_gestor).map(usuario => (
             <li key={usuario.id_user}>
