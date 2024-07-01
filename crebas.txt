@@ -1,0 +1,178 @@
+/*==============================================================*/
+/* Table: "CATEGORIA"                                           */
+/*==============================================================*/
+CREATE TABLE "CATEGORIA" (
+   "id_categoria" SERIAL PRIMARY KEY,
+   "nome" VARCHAR(1024) NOT NULL
+);
+
+/*==============================================================*/
+/* Table: "GESTORES"                                            */
+/*==============================================================*/
+CREATE TABLE "GESTORES" (
+   "id_gestor" SERIAL PRIMARY KEY,
+   "nome" VARCHAR(1024) NOT NULL
+);
+
+/*==============================================================*/
+/* Table: "TIPOUTILIZADOR"                                      */
+/*==============================================================*/
+CREATE TABLE "TIPOUTILIZADOR" (
+   "id_tipo" SERIAL PRIMARY KEY,
+   "descricao" VARCHAR(1024) NOT NULL
+);
+
+/*==============================================================*/
+/* Table: "USER"                                                */
+/*==============================================================*/
+CREATE TABLE "USER" (
+   "id_user" SERIAL PRIMARY KEY,
+   "nome" VARCHAR(1024) NOT NULL,
+   "datanasc" DATE NOT NULL,
+   "telemovel" INTEGER NOT NULL,
+   "email" VARCHAR(1024) UNIQUE NOT NULL,
+   "password" VARCHAR(1024) NOT NULL,
+   "id_ticket" INTEGER,
+   "id_tipo" INTEGER NOT NULL,
+   "nif" VARCHAR(50),
+   "morada" VARCHAR(1024),
+   "fotoperfil" VARCHAR(1024) DEFAULT 'defaultuser.jpg',
+   "id_gestor" INTEGER,
+   CONSTRAINT "FK_USER_TIPOUTILIZADOR" FOREIGN KEY ("id_tipo") REFERENCES "TIPOUTILIZADOR" ("id_tipo") ON DELETE RESTRICT ON UPDATE RESTRICT,
+   CONSTRAINT "FK_USER_GESTORES" FOREIGN KEY ("id_gestor") REFERENCES "GESTORES" ("id_gestor") ON DELETE SET NULL ON UPDATE RESTRICT
+);
+
+/*==============================================================*/
+/* Table: "VERSAO"                                              */
+/*==============================================================*/
+CREATE TABLE "VERSAO" (
+   "id_versao" SERIAL PRIMARY KEY,
+   "nome" VARCHAR(1024) NOT NULL,
+   "id_produto" INTEGER UNIQUE
+);
+
+/*==============================================================*/
+/* Table: "PRODUTO"                                             */
+/*==============================================================*/
+CREATE TABLE "PRODUTO" (
+   "id_produto" SERIAL PRIMARY KEY,
+   "nome" VARCHAR(1024) NOT NULL,
+   "descricao" VARCHAR(1024) NOT NULL,
+   "preco" FLOAT NOT NULL,
+   "id_categoria" INTEGER NOT NULL,
+   "id_gestor" INTEGER,
+   "id_versao" INTEGER NOT NULL,
+   "Iddlc" INTEGER,
+   "fotoproduto" VARCHAR(1024),
+   CONSTRAINT "FK_PRODUTO_CATEGORIA" FOREIGN KEY ("id_categoria") REFERENCES "CATEGORIA" ("id_categoria") ON DELETE RESTRICT ON UPDATE RESTRICT,
+   CONSTRAINT "FK_PRODUTO_GESTORES" FOREIGN KEY ("id_gestor") REFERENCES "GESTORES" ("id_gestor") ON DELETE SET NULL ON UPDATE RESTRICT,
+   CONSTRAINT "FK_PRODUTO_VERSAO" FOREIGN KEY ("id_versao") REFERENCES "VERSAO" ("id_versao") ON DELETE SET NULL ON UPDATE RESTRICT
+);
+
+/*==============================================================*/
+/* Table: "CARRINO"                                             */
+/*==============================================================*/
+CREATE TABLE "CARRINO" (
+   "id_carrinho" SERIAL PRIMARY KEY,
+   "id_user" INTEGER NOT NULL,
+   "data" TIMESTAMP NOT NULL,
+   "produtos" VARCHAR(1024) NOT NULL,
+   CONSTRAINT "FK_CARRINO_USER" FOREIGN KEY ("id_user") REFERENCES "USER" ("id_user") ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+/*==============================================================*/
+/* Table: "TICKETS"                                             */
+/*==============================================================*/
+CREATE TABLE "TICKETS" (
+   "id_ticket" SERIAL PRIMARY KEY,
+   "descricao" VARCHAR(1024) NOT NULL,
+   "id_user" INTEGER NOT NULL,
+   "id_user_resposta" INTEGER,
+   CONSTRAINT "FK_TICKETS_USER" FOREIGN KEY ("id_user") REFERENCES "USER" ("id_user") ON DELETE RESTRICT ON UPDATE RESTRICT,
+   CONSTRAINT "FK_TICKETS_USER_RESPOSTA" FOREIGN KEY ("id_user_resposta") REFERENCES "USER" ("id_user") ON DELETE SET NULL ON UPDATE RESTRICT
+);
+
+/*==============================================================*/
+/* Insert data into tables                                      */
+/*==============================================================*/
+
+/* Inserir dados na tabela "CATEGORIA" */
+INSERT INTO "CATEGORIA" ("nome") VALUES
+('Antivírus'),
+('Ferramentas de Desenvolvimento'),
+('Edição de Vídeo'),
+('Jogos'),
+('Educação'),
+('Office Software'),
+('Design');
+
+/* Inserir dados na tabela "GESTORES" */
+INSERT INTO "GESTORES" ("nome") VALUES
+('1 Ana Ribeiro'),
+('3 Pedro'),
+('4 João Alves'),
+('5 Maria Fernandes'),
+('2 Marco');
+
+/* Inserir dados na tabela "TIPOUTILIZADOR" */
+INSERT INTO "TIPOUTILIZADOR" ("descricao") VALUES
+('Administrador'),
+('Cliente'),
+('Suporte Técnico'),
+('Desenvolvedor'),
+('Gestor de Produto');
+
+/* Inserir dados na tabela "USER" */
+INSERT INTO "USER" ("nome", "datanasc", "telemovel", "email", "password", "id_tipo", "nif", "morada", "fotoperfil", "id_gestor")
+VALUES
+('Ana Ribeiro', '2000-09-30', 944567890, 'ana@cliente.com', 'senha123', 4, '444555666', 'Rua D, 101', 'defaultuser.jpg', 1),
+('Marco', '2000-09-30', 944567890, 'marco@cliente.com', 'senha113233', 4, '4asdsad', 'Rua ss01', 'defaultuser.jpg', 2),
+('Pedro', '2012-09-30', 944567890, 'pedro@cliente.com', 'senha11qweeq3', 4, '22239321', 'Rua sdddd', 'defaultuser.jpg', 3),
+('João Alves', '1990-05-12', 911234567, 'joao@cliente.com', 'senha123', 2, '123456789', 'Rua A, 123', 'defaultuser.jpg', 4),
+('Maria Fernandes', '1985-10-23', 922345678, 'maria@cliente.com', 'senha123', 2, '987654321', 'Rua B, 456', 'defaultuser.jpg', 5),
+('Carlos Lima', '1982-11-03', 933333333, 'carlos@cliente.com', 'senha123', 3, '121212121', 'Rua E, 789', 'defaultuser.jpg', NULL),
+('Beatriz Silva', '1994-06-19', 944444444, 'beatriz@cliente.com', 'senha123', 2, '343434343', 'Rua F, 101', 'defaultuser.jpg', NULL),
+('Lucas Costa', '1978-03-05', 955555555, 'lucas@cliente.com', 'senha123', 3, '565656565', 'Rua G, 202', 'defaultuser.jpg', NULL);
+
+/* Inserir dados na tabela "VERSAO" */
+INSERT INTO "VERSAO" ("nome", "id_produto") VALUES
+('Versão 1.0', 1),
+('Versão 1.0', 2),
+('Versão 1.0', 3),
+('Versão 1.0', 4),
+('Versão 1.0', 5),
+('Versão 1.0', 6),
+('Versão 1.0', 7),
+('Versão 1.0', 8),
+('Versão 1.0', 9),
+('Versão 1.0', 10);
+
+/* Inserir dados na tabela "PRODUTO" */
+INSERT INTO "PRODUTO" ("nome", "descricao", "preco", "id_categoria", "id_gestor", "id_versao", "Iddlc", "fotoproduto") VALUES
+('Antivírus Pro', 'Proteção completa para seu PC', 49.99, 1, 1, 1, NULL, 'antivirus_pro.jpg'),
+('Dev Tools', 'Ferramentas avançadas para desenvolvedores', 99.99, 2, 2, 2, NULL, 'dev_tools.jpg'),
+('Video Editor', 'Edição de vídeo fácil e rápida', 79.99, 3, 3, 3, NULL, 'video_editor.jpg'),
+('Game Master', 'Jogo de estratégia em tempo real', 59.99, 4, 3, 4, NULL, 'game_master.jpg'),
+('Edu Software', 'Plataforma de aprendizado interativo', 29.99, 5, 3, 5, NULL, 'edu_software.jpg'),
+('Office Suite', 'Conjunto de aplicativos de escritório', 39.99, 6, 4, 6, NULL, 'office_suite.jpg'),
+('Design Tool', 'Ferramenta de design gráfico', 89.99, 7, 2, 7, NULL, 'design_tool.jpg'),
+('No Gestor Product 1', 'Produto sem gestor 1', 15.99, 1, NULL, 8, NULL, 'no_gestor_product_1.jpg'),
+('No Gestor Product 2', 'Produto sem gestor 2', 25.99, 2, NULL, 9, NULL, 'no_gestor_product_2.jpg'),
+('No Gestor Product 3', 'Produto sem gestor 3', 35.99, 3, NULL, 10, NULL, 'no_gestor_product_3.jpg');
+
+/* Inserir dados na tabela "CARRINO" */
+INSERT INTO "CARRINO" ("id_user", "data", "produtos") VALUES
+(4, '2024-06-25 14:30:00', 'Office Suite 39.99'), -- João Alves (gestor de Office Suite)
+(1, '2024-06-26 09:15:00', 'Antivírus Pro 49.99'), -- Ana Ribeiro (gestor de Antivírus Pro)
+(2, '2024-06-27 10:20:00', 'Dev Tools 99.99, Design Tool 89.99'), -- Marco (gestor de Dev Tools e Design Tool)
+(3, '2024-06-28 15:45:00', 'Video Editor 79.99, Game Master 59.99, Edu Software 29.99'); -- Pedro (gestor de Video Editor, Game Master e Edu Software)
+
+/* Inserir dados na tabela "TICKETS" */
+INSERT INTO "TICKETS" ("descricao", "id_user", "id_user_resposta") VALUES
+('Problema com instalação do Antivírus Pro', 1, 6), -- Carlos Lima (Suporte Técnico)
+('Erro ao usar o Dev Tools', 2, 6), -- Carlos Lima (Suporte Técnico)
+('Bug no Video Editor', 3, 6), -- Carlos Lima (Suporte Técnico)
+('Problema de desempenho no Game Master', 4, 8), -- Lucas Costa (Suporte Técnico)
+('Dúvidas sobre funcionalidades do Edu Software', 5, 8), -- Lucas Costa (Suporte Técnico)
+('Problema com a licença do Office Suite', 6, 6), -- Carlos Lima (Suporte Técnico)
+('Solicitação de reembolso do Design Tool', 7, 8); -- Lucas Costa (Suporte Técnico)

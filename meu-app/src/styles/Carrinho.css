@@ -1,0 +1,125 @@
+/* ../src/styles/Carrinho.css */
+
+.carrinho-container {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+  }
+  
+  .carrinho-header,
+  .carrinho-pagination {
+    background-color: #3085d6;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .carrinho-header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .carrinho-header .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .carrinho-header input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .carrinho-header button {
+    padding: 8px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carrinho-header button.search-button {
+    border-radius: 5px;
+    padding: 8px 16px;
+  }
+  
+  .carrinho-header button:hover {
+    background-color: #1d5a90;
+  }
+  
+  .carrinho-header select {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .carrinho-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .carrinho-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .carrinho-list li:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .carrinho-list li:nth-child(even) {
+    background-color: #e9e9e9;
+  }
+  
+  .carrinho-list li button {
+    padding: 8px;
+    background-color: #d33;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carrinho-list li button:hover {
+    background-color: #b32424;
+  }
+  
+  .carrinho-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .carrinho-pagination button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .carrinho-pagination button:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+  }
+  
+  .carrinho-pagination span {
+    font-weight: bold;
+  }
+  

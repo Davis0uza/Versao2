@@ -1,0 +1,150 @@
+/* ../src/styles/Usuarios.css */
+
+.usuarios-container {
+    font-family: 'Roboto', sans-serif;
+    margin: 20px;
+  }
+  
+  .usuarios-header,
+  .usuarios-pagination {
+    background-color: #3085d6;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .usuarios-header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .usuarios-header .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .usuarios-header input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .usuarios-header button {
+    padding: 8px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .usuarios-header button.search-button {
+    border-radius: 5px;
+    padding: 8px 16px;
+  }
+  
+  .usuarios-header button:hover {
+    background-color: #1d5a90;
+  }
+  
+  .usuarios-header select {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .usuarios-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .usuarios-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .usuarios-list li:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .usuarios-list li:nth-child(even) {
+    background-color: #e9e9e9;
+  }
+  
+  .usuarios-list li .user-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .usuarios-list li .user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .usuarios-list li .user-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .usuarios-list li .user-details p {
+    margin: 0;
+  }
+  
+  .usuarios-list li button {
+    padding: 8px;
+    background-color: #d33;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  
+  .usuarios-list li button:hover {
+    background-color: #b32424;
+  }
+  
+  .usuarios-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .usuarios-pagination button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .usuarios-pagination button:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+  }
+  
+  .usuarios-pagination span {
+    font-weight: bold;
+  }
+  
