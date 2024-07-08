@@ -28,6 +28,7 @@ import CarrinhoGestores from './components/CarrinhoGestores';
 import EditarProduto from './components/EditarProduto';
 import EditarUser from './components/EditarUser';
 import Cards_destaques from './components/CadsDestaques';
+import './App.css'
 
 function App() {
   return (

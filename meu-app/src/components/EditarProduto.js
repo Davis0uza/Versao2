@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import MenuLateral from './MenuLateral';
 
 function EditarProduto() {
   const [produtos, setProdutos] = useState([]);
@@ -85,11 +86,17 @@ function EditarProduto() {
   };
 
   return (
-    <div>
-      <h1>Editar Produto</h1>
-      <div>
-        <label>Produto:</label>
-        <select onChange={handleProdutoChange} required>
+    <div className="container mt-5">
+            <MenuLateral />
+      <h1 className="text-center mb-4">Editar Produto</h1>
+      <div className="form-group">
+        <label htmlFor="produtoSelect">Produto:</label>
+        <select
+          id="produtoSelect"
+          className="form-control"
+          onChange={handleProdutoChange}
+          required
+        >
           <option value="">Selecione um produto</option>
           {produtos.map(produto => (
             <option key={produto.id_produto} value={produto.id_produto}>
@@ -99,32 +106,76 @@ function EditarProduto() {
         </select>
       </div>
       {produtoSelecionado && (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nome:</label>
-            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
+        <form onSubmit={handleSubmit} className="mt-4">
+          <div className="form-group">
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              className="form-control"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <label>Descrição:</label>
-            <input type="text" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
+          <div className="form-group">
+            <label htmlFor="descricao">Descrição:</label>
+            <input
+              type="text"
+              id="descricao"
+              className="form-control"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <label>Preço:</label>
-            <input type="number" step="0.01" value={preco} onChange={(e) => setPreco(e.target.value)} required />
+          <div className="form-group">
+            <label htmlFor="preco">Preço:</label>
+            <input
+              type="number"
+              step="0.01"
+              id="preco"
+              className="form-control"
+              value={preco}
+              onChange={(e) => setPreco(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <label>Categoria:</label>
-            <input type="text" value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)} required />
+          <div className="form-group">
+            <label htmlFor="idCategoria">Categoria:</label>
+            <input
+              type="text"
+              id="idCategoria"
+              className="form-control"
+              value={idCategoria}
+              onChange={(e) => setIdCategoria(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <label>Versão:</label>
-            <input type="text" value={idVersao} onChange={(e) => setIdVersao(e.target.value)} />
+          <div className="form-group">
+            <label htmlFor="idVersao">Versão:</label>
+            <input
+              type="text"
+              id="idVersao"
+              className="form-control"
+              value={idVersao}
+              onChange={(e) => setIdVersao(e.target.value)}
+            />
           </div>
-          <div>
-            <label>Foto do Produto:</label>
-            <input type="file" onChange={handleFileChange} />
+          <div className="form-group">
+            <label htmlFor="fotoproduto">Foto do Produto:</label>
+            <input
+              type="file"
+              id="fotoproduto"
+              className="form-control-file"
+              onChange={handleFileChange}
+            />
           </div>
-          <button type="submit">Atualizar</button>
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary mt-3">
+              Atualizar
+            </button>
+          </div>
         </form>
       )}
     </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { FaSearch, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/Usuarios.css';
+import MenuLateral from './MenuLateral';
 
 function Usuarios() {
   const [users, setUsers] = useState([]);

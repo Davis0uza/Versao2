@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import MenuLateral from './MenuLateral'; 
 
 const ListarRespostas = () => {
   const [users, setUsers] = useState([]);
@@ -10,13 +12,16 @@ const ListarRespostas = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/users')
-      .then(response => {
-        setUsers(response.data);
-      })
-      .catch(error => {
+    const fetchData = async () => {
+      try {
+        const responseUsers = await axios.get('http://localhost:3000/users');
+        setUsers(responseUsers.data);
+      } catch (error) {
         console.error("Erro ao buscar usuários:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -48,55 +53,64 @@ const ListarRespostas = () => {
         setTickets(tickets.map(ticket => ticket.id_ticket === selectedTicket.id_ticket ? { ...ticket, descricao: updatedDescription } : ticket));
         setSelectedTicket(null);
         setResponse('');
-        alert('Resposta enviada com sucesso');
+        Swal.fire('Sucesso!', 'Resposta enviada com sucesso.', 'success');
       } catch (error) {
         console.error("Erro ao enviar resposta:", error);
-        alert('Erro ao enviar resposta');
+        Swal.fire('Erro!', 'Houve um problema ao enviar a resposta.', 'error');
       }
     } else {
-      alert('Preencha todos os campos');
+      Swal.fire('Erro!', 'Preencha todos os campos.', 'error');
     }
   };
 
   return (
-    <div>
-      <h2>Tickets Usuario</h2>
-      <div>
-        <label>Logado como:</label>
-        <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
-          <option value="">Selecione um usuário</option>
-          {users.map(user => (
-            <option key={user.id_user} value={user.id_user}>
-              {user.nome}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <h3>Tickets com Respostas</h3>
-        <ul>
-          {tickets.map(ticket => (
-            <li key={ticket.id_ticket}>
-              {ticket.descricao}
-              <button onClick={() => setSelectedTicket(ticket)}>Responder</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {selectedTicket && (
-        <div>
-          <h3>Responder Ticket</h3>
-          <div>
-            <label>Conversa:</label>
-            <textarea value={selectedTicket.descricao} readOnly style={{ width: '100%', height: '100px' }} />
+    <div className="container mt-5">
+      <MenuLateral />
+      <div className="row">
+        <div className="col">
+          <h2>Tickets do Usuário</h2>
+          <div className="mb-3">
+            <label className="form-label">Logado como:</label>
+            <select className="form-select" value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
+              <option value="">Selecione um usuário</option>
+              {users.map(user => (
+                <option key={user.id_user} value={user.id_user}>
+                  {user.nome}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
-            <label>Resposta:</label>
-            <textarea value={response} onChange={(e) => setResponse(e.target.value)} style={{ width: '100%', height: '100px' }} />
+            <h3>Tickets com Respostas</h3>
+            <ul className="list-group">
+              {tickets.map(ticket => (
+                <li key={ticket.id_ticket} className="list-group-item d-flex justify-content-between align-items-center">
+                  {ticket.descricao}
+                  <button onClick={() => setSelectedTicket(ticket)} className="btn btn-primary">
+                    Responder
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
-          <button onClick={handleReply}>Enviar Resposta</button>
+          {selectedTicket && (
+            <div className="mt-4">
+              <h3>Responder Ticket</h3>
+              <div className="mb-3">
+                <label className="form-label">Conversa:</label>
+                <textarea className="form-control" value={selectedTicket.descricao} readOnly rows="3" />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Resposta:</label>
+                <textarea className="form-control" value={response} onChange={(e) => setResponse(e.target.value)} rows="3" />
+              </div>
+              <button onClick={handleReply} className="btn btn-primary">
+                Enviar Resposta
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

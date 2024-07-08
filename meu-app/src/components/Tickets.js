@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import MenuLateral from './MenuLateral'; // Importando o componente do menu lateral
 
 function Tickets() {
   const [tickets, setTickets] = useState([]);
@@ -43,17 +44,26 @@ function Tickets() {
   };
 
   return (
-    <div>
-      <h1>Tickets</h1>
-      <button onClick={() => navigate('/novoticket')}>Adicionar Ticket</button>
-      <ul>
-        {tickets.map((ticket) => (
-          <li key={ticket.id_ticket}>
-            {ticket.descricao}
-            <button onClick={() => handleDelete(ticket.id_ticket)}>Remover</button>
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-5">
+      <MenuLateral />
+      <div className="row">
+        <div className="col">
+          <h1 className="mb-4">Tickets</h1>
+          <button onClick={() => navigate('/novoticket')} className="btn btn-primary mb-3">
+            Adicionar Ticket
+          </button>
+          <ul className="list-group">
+            {tickets.map((ticket) => (
+              <li key={ticket.id_ticket} className="list-group-item d-flex justify-content-between align-items-center">
+                {ticket.descricao}
+                <button onClick={() => handleDelete(ticket.id_ticket)} className="btn btn-danger">
+                  Remover
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

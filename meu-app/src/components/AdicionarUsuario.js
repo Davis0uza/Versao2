@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import MenuLateral from './MenuLateral';
+import '../styles/AdicionarUsuario.css'; 
 
 function AdicionarUsuario() {
   const [nome, setNome] = useState('');
@@ -37,42 +39,47 @@ function AdicionarUsuario() {
   };
 
   return (
-    <div>
-      <h1>Adicionar Usuário</h1>
+    <div className="container mt-5">
+      <MenuLateral />
+      <h1 className="text-center mb-4 add_user">Adicionar Usuário</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="nome" className="label-custom">Nome:</label>
+          <input type="text" id="nome" className="form-control input-custom" value={nome} onChange={(e) => setNome(e.target.value)} required />
         </div>
-        <div>
-          <label>Data de Nascimento:</label>
-          <input type="date" value={datanasc} onChange={(e) => setDatanasc(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="datanasc" className="label-custom">Data de Nascimento:</label>
+          <input type="date" id="datanasc" className="form-control input-custom" value={datanasc} onChange={(e) => setDatanasc(e.target.value)} required />
         </div>
-        <div>
-          <label>Telemóvel:</label>
-          <input type="text" value={telemovel} onChange={(e) => setTelemovel(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="telemovel" className="label-custom">Telemóvel:</label>
+          <input type="text" id="telemovel" className="form-control input-custom" value={telemovel} onChange={(e) => setTelemovel(e.target.value)} required />
         </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="email" className="label-custom">Email:</label>
+          <input type="email" id="email" className="form-control input-custom" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="password" className="label-custom">Password:</label>
+          <input type="password" id="password" className="form-control input-custom" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
-        <div>
-          <label>ID Tipo:</label>
-          <input type="number" value={id_tipo} onChange={(e) => setIdTipo(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="id_tipo" className="label-custom">ID Tipo:</label>
+          <input type="number" id="id_tipo" className="form-control input-custom" value={id_tipo} onChange={(e) => setIdTipo(e.target.value)} required />
         </div>
-        <div>
-          <label>NIF:</label>
-          <input type="text" value={nif} onChange={(e) => setNif(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="nif" className="label-custom">NIF:</label>
+          <input type="text" id="nif" className="form-control input-custom" value={nif} onChange={(e) => setNif(e.target.value)} required />
         </div>
-        <div>
-          <label>Morada:</label>
-          <input type="text" value={morada} onChange={(e) => setMorada(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="morada" className="label-custom">Morada:</label>
+          <input type="text" id="morada" className="form-control input-custom" value={morada} onChange={(e) => setMorada(e.target.value)} required />
         </div>
-        <button type="submit">Adicionar</button>
+        <div className="text-center">
+          <button type="submit" className="btn btn-primary mt-3">
+            Adicionar
+          </button>
+        </div>
       </form>
     </div>
   );
