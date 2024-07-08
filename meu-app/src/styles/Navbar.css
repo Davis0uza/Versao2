@@ -1,0 +1,167 @@
+/* Navbar.css */
+.navbar-container {
+  width: 100%;
+  position: fixed; /* Fixar a navbar no topo */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Garantir que a navbar fique acima de outros conteúdos */
+  background-color: transparent;
+}
+
+.navbar-content {
+  width: 80%; /* Ajustar para a largura desejada */
+  max-width: 1200px; /* Definir um limite máximo de largura */
+  margin: 0 auto; /* Centralizar a navbar */
+}
+
+.top-nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #007bff; /* Cor de fundo azul claro */
+  padding: 5px 20px;
+}
+
+.top-nav a {
+  margin-left: 20px;
+  color: #fff; /* Cor do texto branca */
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0056b3; /* Cor de fundo azul mais escuro */
+  padding: 10px 20px;
+  border-bottom-left-radius: 10px; /* Arredondar os cantos inferiores */
+  border-bottom-right-radius: 10px; /* Arredondar os cantos inferiores */
+}
+
+.nav-left, .nav-center, .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+}
+
+.search-bar {
+  display: flex;
+  margin: 0 auto; /* Centralizar a barra de pesquisa */
+}
+
+.search-bar input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff; /* Botão de pesquisa branco */
+  color: #0056b3; /* Texto do botão de pesquisa azul */
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.nav-right {
+  margin-left: auto; /* Mover os ícones para o canto direito */
+}
+
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-icon {
+  margin-left: 20px;
+  color: #fff; /* Cor do ícone do carrinho branca */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 12px;
+}
+
+.cart-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  z-index: 1000;
+}
+
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-item button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background-color: #c82333;
+}
+
+.cart-total {
+  padding: 10px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.clear-cart-btn, .checkout-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.clear-cart-btn svg, .checkout-btn svg {
+  margin-right: 5px;
+}
+
+.clear-cart-btn:hover, .checkout-btn:hover {
+  background-color: #c82333;
+}

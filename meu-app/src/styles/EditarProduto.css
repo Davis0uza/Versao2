@@ -1,0 +1,37 @@
+/* Produtos.css */
+.produtos-container {
+    padding: 20px;
+  }
+  
+  .produtos-list li {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    list-style-type: none;
+  }
+  
+  .produtos-list li.expanded img {
+    height: 200px;
+    width: 200px;
+  }
+  
+  .produto-info .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-buttons .edit-button,
+  .action-buttons .delete-button {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .action-buttons .edit-button:hover,
+  .action-buttons .delete-button:hover {
+    background-color: #ddd;
+  }
+  

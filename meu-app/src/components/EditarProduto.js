@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import MenuLateral from './MenuLateral';
+import '../styles/EditarUser.css'; 
 
 function EditarProduto() {
   const [produtos, setProdutos] = useState([]);
@@ -15,16 +16,29 @@ function EditarProduto() {
   const [fotoproduto, setFotoProduto] = useState(null);
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     axios.get('http://localhost:3000/produtos/all')
       .then(response => {
         setProdutos(response.data);
+
+        if (id) {
+          const produto = response.data.find(p => p.id_produto === parseInt(id));
+          if (produto) {
+            setProdutoSelecionado(produto);
+            setNome(produto.nome);
+            setDescricao(produto.descricao);
+            setPreco(produto.preco);
+            setIdCategoria(produto.id_categoria);
+            setIdVersao(produto.id_versao);
+          }
+        }
       })
       .catch(error => {
         console.error("Erro ao buscar produtos:", error);
       });
-  }, []);
+  }, [id]);
 
   const handleProdutoChange = (e) => {
     const produtoId = e.target.value;
@@ -87,7 +101,7 @@ function EditarProduto() {
 
   return (
     <div className="container mt-5">
-            <MenuLateral />
+      <MenuLateral />
       <h1 className="text-center mb-4">Editar Produto</h1>
       <div className="form-group">
         <label htmlFor="produtoSelect">Produto:</label>
@@ -95,6 +109,7 @@ function EditarProduto() {
           id="produtoSelect"
           className="form-control"
           onChange={handleProdutoChange}
+          value={produtoSelecionado ? produtoSelecionado.id_produto : ''}
           required
         >
           <option value="">Selecione um produto</option>

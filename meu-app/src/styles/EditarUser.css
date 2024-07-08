@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    margin: 0;
+  }
+  
+  .menu-lateral {
+    flex: 0 0 250px; /* Ajuste a largura do menu lateral conforme necessário */
+  }
+  
+  .container {
+    margin-left: 270px; /* Ajuste conforme necessário para espaçamento ao lado do menu */
+    padding: 20px;
+    width: calc(100% - 270px); /* Ajuste conforme necessário para espaçamento ao lado do menu */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #164375;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group .form-control-file {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: #3085d6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #2673b5;
+  }
+  

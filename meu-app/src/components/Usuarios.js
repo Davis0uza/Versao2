@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { FaSearch, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaSearch, FaTrash, FaChevronDown, FaChevronUp, FaPlus, FaEdit, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/Usuarios.css';
 import MenuLateral from './MenuLateral';
 
@@ -11,6 +12,8 @@ function Usuarios() {
   const [sortCriteria, setSortCriteria] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [expandedUser, setExpandedUser] = useState(null);
+  const navigate = useNavigate();
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -81,6 +84,14 @@ function Usuarios() {
     }
   };
 
+  const toggleExpand = (id) => {
+    setExpandedUser(expandedUser === id ? null : id);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/editaruser/${id}`);
+  };
+
   const sortedAndFilteredUsers = () => {
     let filteredUsers = users.filter(user => 
       user.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -115,60 +126,83 @@ function Usuarios() {
   const totalPages = Math.ceil(sortedAndFilteredUsers().length / itemsPerPage);
 
   return (
-    <div className="usuarios-container">
-      <div className="usuarios-header">
-        <h1>Usuários</h1>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Pesquisar..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-          <button className="search-button" onClick={() => setSearchTerm('')}>
-            <FaSearch />
-          </button>
-          <select value={sortCriteria} onChange={handleSortChange}>
-            <option value="">Ordenar por</option>
-            <option value="id_asc">ID Crescente</option>
-            <option value="id_desc">ID Decrescente</option>
-            <option value="name_asc">Ordem Alfabética Crescente</option>
-            <option value="name_desc">Ordem Alfabética Decrescente</option>
-          </select>
-        </div>
-      </div>
-      <ul className="usuarios-list">
-        {paginatedUsers().map(user => (
-          <li key={user.id_user}>
-            <div className="user-info">
-              <img src={`http://localhost:3000/uploads/${user.fotoperfil}`} alt={user.nome} />
-              <div className="user-details">
-                <p>ID: {user.id_user}</p>
-                <p>Nome: {user.nome}</p>
-                <p>Email: {user.email}</p>
-                <p>ID_gestor: {user.id_gestor}</p>
-              </div>
-            </div>
-            <button onClick={() => handleDelete(user.id_user)}>
-              <FaTrash />
+    <div className="app-container">
+      <MenuLateral />
+      <div className="usuarios-container">
+        <div className="usuarios-header">
+          <h1>Usuários
+            <Link to="/adicionar-usuario">
+              <button className="add-button">
+                <FaPlus />
+              </button>
+            </Link>
+          </h1>
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Pesquisar..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <button className="search-button" onClick={() => setSearchTerm('')}>
+              <FaSearch />
             </button>
-          </li>
-        ))}
-      </ul>
-      <div className="usuarios-pagination">
-        <button 
-          onClick={() => handlePageChange('prev')} 
-          disabled={currentPage === 1}
-        >
-          <FaArrowLeft /> Anterior
-        </button>
-        <span>{currentPage}/{totalPages}</span>
-        <button 
-          onClick={() => handlePageChange('next')} 
-          disabled={currentPage === totalPages}
-        >
-          Próxima <FaArrowRight />
-        </button>
+            <select value={sortCriteria} onChange={handleSortChange}>
+              <option value="">Ordenar por</option>
+              <option value="id_asc">ID Crescente</option>
+              <option value="id_desc">ID Decrescente</option>
+              <option value="name_asc">Ordem Alfabética Crescente</option>
+              <option value="name_desc">Ordem Alfabética Decrescente</option>
+            </select>
+          </div>
+        </div>
+        <ul className="usuarios-list">
+          {paginatedUsers().map(user => (
+            <li key={user.id_user} className={expandedUser === user.id_user ? 'expanded' : ''}>
+              <div className="user-info">
+                <div className="primary-info">
+                  <img src={`http://localhost:3000/uploads/${user.fotoperfil}`} alt={user.nome} />
+                  <p>ID: {user.id_user}</p>
+                  <p>Nome: {user.nome}</p>
+                  <p>Email: {user.email}</p>
+                  <button className="toggle-button" onClick={() => toggleExpand(user.id_user)}>
+                    {expandedUser === user.id_user ? <FaChevronUp /> : <FaChevronDown />}
+                  </button>
+                </div>
+                <div className="action-buttons">
+                  <button className="edit-button" onClick={() => handleEdit(user.id_user)}>
+                    <FaEdit />
+                  </button>
+                  <button className="delete-button" onClick={() => handleDelete(user.id_user)}>
+                    <FaTrash />
+                  </button>
+                </div>
+              </div>
+              <div className="extra-info">
+                <p>Data de Nascimento: {user.datanasc}</p>
+                <p>Telemóvel: {user.telemovel}</p>
+                <p>Morada: {user.morada}</p>
+                <p>Tipo: {getTipoNome(user.id_tipo)}</p>
+                <p>NIF: {user.nif}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="usuarios-pagination">
+          <button 
+            onClick={() => handlePageChange('prev')} 
+            disabled={currentPage === 1}
+          >
+            <FaArrowLeft /> Anterior
+          </button>
+          <span>{currentPage}/{totalPages}</span>
+          <button 
+            onClick={() => handlePageChange('next')} 
+            disabled={currentPage === totalPages}
+          >
+            Próxima <FaArrowRight />
+          </button>
+        </div>
       </div>
     </div>
   );

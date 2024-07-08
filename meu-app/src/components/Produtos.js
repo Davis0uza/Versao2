@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { FaSearch, FaTrash, FaArrowLeft, FaArrowRight, FaChevronDown, FaChevronUp, FaPlus } from 'react-icons/fa';
+import { FaSearch, FaTrash, FaChevronDown, FaChevronUp, FaPlus, FaEdit, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/Produtos.css';
 
 function Produtos() {
@@ -14,6 +14,7 @@ function Produtos() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedProduto, setExpandedProduto] = useState(null);
+  const navigate = useNavigate();
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -110,6 +111,10 @@ function Produtos() {
     setExpandedProduto(expandedProduto === id ? null : id);
   };
 
+  const handleEdit = (id) => {
+    navigate(`/editarproduto/${id}`);
+  };
+
   const sortedAndFilteredProdutos = () => {
     let filteredProdutos = produtos.filter(produto => 
       produto.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -185,9 +190,14 @@ function Produtos() {
                   {expandedProduto === produto.id_produto ? <FaChevronUp /> : <FaChevronDown />}
                 </button>
               </div>
-              <button className="delete-button" onClick={() => handleDelete(produto.id_produto)}>
-                <FaTrash />
-              </button>
+              <div className="action-buttons">
+                <button className="edit-button" onClick={() => handleEdit(produto.id_produto)}>
+                  <FaEdit />
+                </button>
+                <button className="delete-button" onClick={() => handleDelete(produto.id_produto)}>
+                  <FaTrash />
+                </button>
+              </div>
             </div>
             <div className="extra-info">
               <p>Descrição: {produto.descricao}</p>

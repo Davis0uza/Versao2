@@ -1,5 +1,7 @@
-import React from 'react';
+// App.js
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Usuarios from './components/Usuarios';
 import AdicionarUsuario from './components/AdicionarUsuario';
@@ -28,11 +30,47 @@ import CarrinhoGestores from './components/CarrinhoGestores';
 import EditarProduto from './components/EditarProduto';
 import EditarUser from './components/EditarUser';
 import Cards_destaques from './components/CadsDestaques';
-import './App.css'
+import './App.css';
 
 function App() {
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
+    const productInCart = cart.find(item => item.id_produto === product.id_produto);
+    if (productInCart) {
+      if (productInCart.quantity < product.stock) {
+        setCart(cart.map(item => 
+          item.id_produto === product.id_produto ? { ...item, quantity: item.quantity + 1 } : item
+        ));
+      } else {
+        alert('Produto esgotado, peça um orçamento.');
+      }
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (product) => {
+    const updatedCart = cart.map(item =>
+      item.id_produto === product.id_produto ? { ...item, quantity: item.quantity - 1 } : item
+    ).filter(item => item.quantity > 0);
+    setCart(updatedCart);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <div className="App">
+      <Navbar cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/usuarios" element={<Usuarios />} />
@@ -59,9 +97,9 @@ function App() {
         <Route path="/listar-respostas" element={<ListarRespostas />} />
         <Route path="/promover-tipoutilizador" element={<PromoverTipoUtilizador />} />
         <Route path="/carrinho-gestores" element={<CarrinhoGestores />} />
-        <Route path="/editarproduto" element={<EditarProduto />} />
-        <Route path="/editaruser" element={<EditarUser />} />
-        <Route path='/cards' element={<Cards_destaques/>}/>
+        <Route path="/editarproduto/:id" element={<EditarProduto />} />
+        <Route path="/editaruser/:id" element={<EditarUser />} />
+        <Route path="/cards" element={<Cards_destaques addToCart={addToCart} />} />
       </Routes>
     </div>
   );

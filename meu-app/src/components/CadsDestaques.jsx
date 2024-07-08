@@ -1,17 +1,17 @@
+// CadsDestaques.jsx
 import React, { useEffect, useState } from "react";
 import '../styles/CardDestaques.css';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
-function Cards_destaques() {
+function Cards_destaques({ addToCart }) {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/produtos/all')
+    axios.get('http://localhost:3000/produtos/sem-gestor')
       .then(response => {
         setProdutos(response.data);
       })
@@ -41,11 +41,9 @@ function Cards_destaques() {
               </Card.Text>
               <div className="price-and-cart">
                 <span className="product-price">{produto.preco}€</span>
-                <Link to={`/produto/${produto.id_produto}`}>
-                  <Button className="add-to-cart-btn" variant="primary">
-                    <MdOutlineShoppingCart /> +
-                  </Button>
-                </Link>
+                <Button className="add-to-cart-btn" variant="primary" onClick={() => addToCart(produto)}>
+                  <MdOutlineShoppingCart /> +
+                </Button>
               </div>
             </Card.Body>
           </Card>
