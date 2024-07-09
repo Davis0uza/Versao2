@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Button, ListGroup, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import MenuLateral from './MenuLateral';
 
 function Gestores() {
   const [gestores, setGestores] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/gestores').then(response => {
-      setGestores(response.data);
-    }).catch(error => {
-      console.error("Erro ao buscar dados de gestores:", error);
-    });
+    axios.get('http://localhost:3000/gestores')
+      .then(response => {
+        setGestores(response.data);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar dados de gestores:", error);
+      });
   }, []);
 
   const handleDelete = (id) => {
@@ -48,20 +52,30 @@ function Gestores() {
   };
 
   return (
-    <div>
-      <h1>Gestores</h1>
-      <Link to="/adicionar-gestor">
-        <button>Adicionar</button>
-      </Link>
-      <ul>
+    <Container className="mt-5">
+      <MenuLateral/>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 style={{ color: '#164375', fontWeight: 'bold' }}>Gestores</h1>
+        <Link to="/adicionar-gestor">
+          <Button variant="primary">Adicionar Gestor</Button>
+        </Link>
+      </div>
+      <ListGroup>
         {gestores.map(gestor => (
-          <li key={gestor.id_gestor}>
+          <ListGroup.Item key={gestor.id_gestor} className="d-flex justify-content-between align-items-center">
             {gestor.nome}
-            <button onClick={() => handleDelete(gestor.id_gestor)}>Remover</button>
-          </li>
+            <div >
+              <Link to={`/editar-gestor/${gestor.id_gestor}`} className="btn btn-outline-primary me-2">
+                Editar
+              </Link>
+              <Button style={{ margin:'5px' }} variant="outline-danger" onClick={() => handleDelete(gestor.id_gestor)}>
+                Remover
+              </Button>
+            </div>
+          </ListGroup.Item>
         ))}
-      </ul>
-    </div>
+      </ListGroup>
+    </Container>
   );
 }
 

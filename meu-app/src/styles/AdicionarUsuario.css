@@ -1,13 +1,35 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.label-custom {
+  color: #164375;
+  font-weight: bold;
+}
+
+.input-custom {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #164375;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0d2b4a;
+}
+
 .add_user {
-    color: #164375;
-    font-weight: bold;
-  }
-  
-  .btn{
-    background-color: #164375;
-  }
-  .input-custom {
-    border-color: #164375; 
-    border-width: 2px;
-  }
-  
+  color: #164375;
+  font-weight: bold;
+}

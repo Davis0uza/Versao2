@@ -48,7 +48,7 @@ function Tickets() {
       <MenuLateral />
       <div className="row">
         <div className="col">
-          <h1 className="mb-4">Tickets</h1>
+          <h1 style={{ color: '#164375', fontWeight: 'bold' }} className="mb-4">Tickets</h1>
           <button onClick={() => navigate('/novoticket')} className="btn btn-primary mb-3">
             Adicionar Ticket
           </button>

@@ -1,8 +1,8 @@
-// Navbar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaBook, FaSearch, FaTrash } from 'react-icons/fa';
 import '../styles/Navbar.css';
+import logo from '../Assets/logo4tec.jpeg';
 
 const Navbar = ({ cart, removeFromCart, clearCart }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -17,14 +17,14 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
     <div className="navbar-container">
       <div className="navbar-content">
         <div className="top-nav">
-          <Link to="/about">Sobre</Link>
-          <Link to="/contact">Contactos</Link>
+          <Link to="/sobre">Sobre</Link>
+          <Link to="/contactos">Contactos</Link>
           <Link to="/register">Registar</Link>
           <Link to="/login">Login</Link>
         </div>
         <div className="main-nav">
           <div className="nav-center">
-            <img src="/path/to/logo.png" alt="Logo" className="logo" />
+            <img src={logo} alt="Logo" className="logo" />
           </div>
           <div className="search-bar">
             <input type="text" placeholder="Pesquisar..." />
@@ -35,10 +35,7 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
               <FaBook />
             </Link>
             <div className="cart-icon-container">
-              <div
-                className="cart-icon"
-                onClick={toggleCart}
-              >
+              <div className="cart-icon" onClick={toggleCart}>
                 <FaShoppingCart />
                 {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
               </div>

@@ -1,29 +1,28 @@
-/* Navbar.css */
 .navbar-container {
   width: 100%;
-  position: fixed; /* Fixar a navbar no topo */
+  position: fixed; /* Fix the navbar at the top */
   top: 0;
   left: 0;
-  z-index: 1000; /* Garantir que a navbar fique acima de outros conteúdos */
+  z-index: 1000; /* Ensure navbar stays above other elements */
   background-color: transparent;
 }
 
 .navbar-content {
-  width: 80%; /* Ajustar para a largura desejada */
-  max-width: 1200px; /* Definir um limite máximo de largura */
-  margin: 0 auto; /* Centralizar a navbar */
+  width: 80%; /* Adjust to desired width */
+  max-width: 1200px; /* Set a maximum width */
+  margin: 0 auto; /* Center the navbar */
 }
 
 .top-nav {
   display: flex;
   justify-content: flex-end;
-  background-color: #007bff; /* Cor de fundo azul claro */
+  background-color: #164375; /* Light blue background */
   padding: 5px 20px;
 }
 
 .top-nav a {
   margin-left: 20px;
-  color: #fff; /* Cor do texto branca */
+  color: #fff; /* White text color */
   text-decoration: none;
 }
 
@@ -31,10 +30,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0056b3; /* Cor de fundo azul mais escuro */
+  background-color: #0e2b4d; /* Darker blue background */
   padding: 10px 20px;
-  border-bottom-left-radius: 10px; /* Arredondar os cantos inferiores */
-  border-bottom-right-radius: 10px; /* Arredondar os cantos inferiores */
+  border-bottom-left-radius: 10px; /* Round bottom corners */
+  border-bottom-right-radius: 10px; /* Round bottom corners */
 }
 
 .nav-left, .nav-center, .nav-right {
@@ -48,7 +47,7 @@
 
 .search-bar {
   display: flex;
-  margin: 0 auto; /* Centralizar a barra de pesquisa */
+  margin: 0 auto; /* Center the search bar */
 }
 
 .search-bar input {
@@ -60,14 +59,14 @@
 .search-bar button {
   padding: 5px;
   border: 1px solid #ddd;
-  background-color: #fff; /* Botão de pesquisa branco */
-  color: #0056b3; /* Texto do botão de pesquisa azul */
+  background-color: #fff; /* White search button */
+  color: #0056b3; /* Blue text for search button */
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
 
 .nav-right {
-  margin-left: auto; /* Mover os ícones para o canto direito */
+  margin-left: auto; /* Move icons to the right corner */
 }
 
 .cart-icon-container {
@@ -76,7 +75,7 @@
 
 .cart-icon {
   margin-left: 20px;
-  color: #fff; /* Cor do ícone do carrinho branca */
+  color: #fff; /* White cart icon color */
   text-decoration: none;
   cursor: pointer;
 }

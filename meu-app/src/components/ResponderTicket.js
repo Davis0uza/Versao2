@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import MenuLateral from './MenuLateral'; // Importando o componente do menu lateral
+import '../styles/ListarRespostas.css'; // Importando o arquivo CSS criado
 
 const ListarRespostas = () => {
   const [users, setUsers] = useState([]);
@@ -71,7 +72,7 @@ const ListarRespostas = () => {
         </div>
         <div className="col-md-9">
           <div className="content-wrapper"> {/* Adicionando uma div wrapper para o conteúdo */}
-            <h2>Tickets do Usuário</h2>
+            <h2 style={{ color: '#164375', fontWeight: 'bold' }}>Tickets do Usuário</h2>
             <div className="mb-3">
               <label className="form-label">Logado como:</label>
               <select className="form-select" value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
@@ -101,11 +102,11 @@ const ListarRespostas = () => {
                 <h3>Responder Ticket</h3>
                 <div className="mb-3">
                   <label className="form-label">Conversa:</label>
-                  <textarea className="form-control" value={selectedTicket.descricao} readOnly rows="3" />
+                  <textarea className="form-control textarea-response" value={selectedTicket.descricao} readOnly rows="3" />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Resposta:</label>
-                  <textarea className="form-control" value={response} onChange={(e) => setResponse(e.target.value)} rows="3" />
+                  <textarea className="form-control textarea-response" value={response} onChange={(e) => setResponse(e.target.value)} rows="3" />
                 </div>
                 <button onClick={handleReply} className="btn btn-primary">
                   Enviar Resposta

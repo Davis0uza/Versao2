@@ -1,0 +1,71 @@
+.contact-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Center content vertically */
+        min-height: 100vh; /* Ensure it covers the full height of the viewport */
+        padding: 20px; /* Add padding for spacing */
+        box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+.hero-image-container {
+    width: 100%;
+    max-width: 800px; /* Optional: Limit the width of the image */
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+    margin: 0 auto; /* Center the navbar */
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-info {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px; /* Optional: Limit the width of the content */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+    color: #043873;
+    font-weight: bold;
+}
+
+.contact-info p {
+    margin: 10px 0;
+    font-size: 1.2rem; /* Increase font size for better readability */
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Darker shade on hover */
+}
+
+.icon_email {
+    font-size: 2rem;
+    vertical-align: middle; /* Align the icon vertically with text */
+}

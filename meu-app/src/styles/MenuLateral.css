@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  padding: 0; 
+
 }
 
 .menu-lateral ul {
@@ -20,29 +20,32 @@
   position: relative;
 }
 
-.menu-lateral ul li a, .menu-lateral ul li {
+.menu-lateral ul li a,
+.menu-lateral ul li {
   display: block;
   padding: 10px 20px;
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.menu-lateral ul li a:hover, .menu-lateral ul li:hover {
+.menu-lateral ul li a:hover,
+.menu-lateral ul li:hover {
   background-color: #97BFFF;
 }
 
 .menu-lateral ul li ul {
   display: none;
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 0; /* Remova o padding adicional */
 }
 
-.menu-lateral ul li:hover > ul {
+.menu-lateral ul li .submenu.open {
   display: block;
 }
 
 .menu-lateral ul li ul li a {
-  padding: 10px 20px;
+  padding: 10px 40px; /* Adicione um padding para diferenciar os subitens */
   color: #ddd;
 }
 

@@ -102,7 +102,7 @@ function EditarProduto() {
   return (
     <div className="container mt-5">
       <MenuLateral />
-      <h1 className="text-center mb-4">Editar Produto</h1>
+      <h1  className="text-center mb-4">Editar Produto</h1>
       <div className="form-group">
         <label htmlFor="produtoSelect">Produto:</label>
         <select

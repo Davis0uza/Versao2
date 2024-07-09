@@ -56,7 +56,7 @@ const NovoTicket = () => {
   return (
     <div className="container mt-5">
       <MenuLateral />
-      <h1 style={{ color: '#164375', fontWeight: 'bold' }} className="text-center mb-4">Novo Ticket</h1>
+      <h1 style={{ color: '#164375', fontWeight: 'bold' }} className=" mb-4">Novo Ticket</h1>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="form-group">
           <label htmlFor="descricao">Descrição:</label>

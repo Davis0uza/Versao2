@@ -3,11 +3,12 @@
 .produtos-container {
     font-family: 'Roboto', sans-serif;
     margin: 20px;
+    margin-left: 270px;
   }
   
   .produtos-header,
   .produtos-pagination {
-    background-color: #3085d6;
+    background-color: #164375;
     padding: 10px;
     border-radius: 5px;
     color: white;

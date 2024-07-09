@@ -113,7 +113,7 @@ function Versoes() {
         </div>
         <div className="col-md-9">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
-            <h1>Versões</h1>
+            <h1 >Versões</h1>
             <Link to="/adicionar-versao">
               <button className="btn btn-primary mb-3">Adicionar</button>
             </Link>

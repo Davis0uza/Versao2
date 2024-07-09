@@ -46,7 +46,7 @@ const AdicionarStock = () => {
         <div className="col-md-3">
           <MenuLateral />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-12">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
             <h2 style={{ color: '#164375', fontWeight: 'bold' }}>Adicionar Stock</h2>
             <form onSubmit={handleSubmit}>

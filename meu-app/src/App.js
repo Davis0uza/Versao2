@@ -30,6 +30,8 @@ import CarrinhoGestores from './components/CarrinhoGestores';
 import EditarProduto from './components/EditarProduto';
 import EditarUser from './components/EditarUser';
 import Cards_destaques from './components/CadsDestaques';
+import Contactos from './components/Contactos';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
@@ -73,6 +75,7 @@ function App() {
       <Navbar cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/adicionar-usuario" element={<AdicionarUsuario />} />
         <Route path="/produtos" element={<Produtos />} />
@@ -97,9 +100,10 @@ function App() {
         <Route path="/listar-respostas" element={<ListarRespostas />} />
         <Route path="/promover-tipoutilizador" element={<PromoverTipoUtilizador />} />
         <Route path="/carrinho-gestores" element={<CarrinhoGestores />} />
-        <Route path="/editarproduto/:id" element={<EditarProduto />} />
-        <Route path="/editaruser/:id" element={<EditarUser />} />
+        <Route path="/editarproduto" element={<EditarProduto />} />
+        <Route path="/editaruser" element={<EditarUser />} />
         <Route path="/cards" element={<Cards_destaques addToCart={addToCart} />} />
+        <Route path="/contactos" element={<Contactos />} />
       </Routes>
     </div>
   );

@@ -54,9 +54,9 @@ function AdicionarProduto() {
         <div className="col-md-3">
           <MenuLateral />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-12">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
-            <h1>Adicionar Produto</h1>
+            <h1  style={{ color: '#164375', fontWeight: 'bold' }}>Adicionar Produto</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="nome" className="form-label">Nome:</label>

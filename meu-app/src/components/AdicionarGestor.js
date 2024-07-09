@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, ListGroup } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import MenuLateral from './MenuLateral';
 
@@ -67,17 +68,17 @@ function AdicionarGestor() {
   return (
     <div>
       <MenuLateral />
-      <div style={{ marginLeft: '260px', padding: '20px' }}>
-        <h1>Adicionar Gestores</h1>
-        <ul>
+      <Container style={{ marginTop: '20px', marginLeft: '260px' }}>
+        <h1 style={{ color: '#164375', fontWeight: 'bold' }}>Adicionar Gestores</h1>
+        <ListGroup>
           {usuarios.filter(usuario => !usuario.id_gestor).map(usuario => (
-            <li key={usuario.id_user}>
+            <ListGroup.Item key={usuario.id_user} className="d-flex justify-content-between align-items-center">
               {usuario.nome}
-              <button onClick={() => handlePromote(usuario.id_user, usuario.nome)}>Promover</button>
-            </li>
+              <Button variant="primary" onClick={() => handlePromote(usuario.id_user, usuario.nome)}>Promover</Button>
+            </ListGroup.Item>
           ))}
-        </ul>
-      </div>
+        </ListGroup>
+      </Container>
     </div>
   );
 }
