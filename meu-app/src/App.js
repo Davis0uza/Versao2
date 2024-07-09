@@ -100,8 +100,8 @@ function App() {
         <Route path="/listar-respostas" element={<ListarRespostas />} />
         <Route path="/promover-tipoutilizador" element={<PromoverTipoUtilizador />} />
         <Route path="/carrinho-gestores" element={<CarrinhoGestores />} />
-        <Route path="/editarproduto" element={<EditarProduto />} />
-        <Route path="/editaruser" element={<EditarUser />} />
+        <Route path="/editarproduto/:id" element={<EditarProduto />} />
+        <Route path="/editaruser/:id" element={<EditarUser />} />
         <Route path="/cards" element={<Cards_destaques addToCart={addToCart} />} />
         <Route path="/contactos" element={<Contactos />} />
       </Routes>
