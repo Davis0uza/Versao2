@@ -10,7 +10,7 @@ const AdicionarStock = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/produtos');
+        const response = await axios.get('http://localhost:3000/produtos/all');
         const produtosUnicos = response.data.reduce((acc, produto) => {
           if (!acc.find(p => p.nome === produto.nome)) {
             acc.push(produto);
