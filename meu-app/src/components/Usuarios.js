@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { FaSearch, FaTrash, FaChevronDown, FaChevronUp, FaPlus, FaEdit, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/Usuarios.css';
-import MenuLateral from './MenuLateral';
+import AreaAdmin from './AreaAdmin';
 
 function Usuarios() {
   const [users, setUsers] = useState([]);
@@ -127,7 +127,7 @@ function Usuarios() {
 
   return (
     <div className="app-container">
-      <MenuLateral />
+      <AreaAdmin />
       <div className="usuarios-container">
         <div className="usuarios-header">
           <h1>Usuários

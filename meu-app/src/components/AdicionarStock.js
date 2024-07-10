@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MenuLateral from './MenuLateral'; 
+import AreaGestorProdutos from './AreaGestorProdutos'; 
 
 const AdicionarStock = () => {
   const [produtos, setProdutos] = useState([]);
@@ -44,7 +44,7 @@ const AdicionarStock = () => {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-3">
-          <MenuLateral />
+          <AreaGestorProdutos />
         </div>
         <div className="col-md-12">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral';
+import AreaGestorProdutos from './AreaGestorProdutos';
 import { FaTrash } from 'react-icons/fa'; 
 
 const Categorias = () => {
@@ -53,7 +53,7 @@ const Categorias = () => {
 
   return (
     <div className="container mt-5">
-      <MenuLateral />
+      <AreaGestorProdutos />
       <div className="categorias-wrapper">
         <h1 style={{ color: '#164375', fontWeight: 'bold' }} className="mb-4">Categorias</h1>
         <Link to="/adicionar-categoria" className="btn btn-primary mb-4">

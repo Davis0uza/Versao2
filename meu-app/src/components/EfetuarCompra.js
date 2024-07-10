@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AreaGestorProdutos from './AreaGestorProdutos';
 
 const EfetuarCompra = () => {
   const [gestores, setGestores] = useState([]);
@@ -79,6 +80,7 @@ const EfetuarCompra = () => {
 
   return (
     <div>
+      <AreaGestorProdutos/>
       <h2>Efetuar Compra</h2>
       <div>
         <label>Selecionar Gestor:</label>

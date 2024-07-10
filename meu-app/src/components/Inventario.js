@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AreaUser from './AreaUser';
 
 const Inventario = () => {
   const [gestores, setGestores] = useState([]);
@@ -78,6 +79,7 @@ const Inventario = () => {
 
   return (
     <div>
+      <AreaUser/>
       <h2>Inventário</h2>
       <div>
         <label>Login iniciado como:</label>

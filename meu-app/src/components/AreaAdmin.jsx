@@ -16,7 +16,7 @@ const MenuLateral = () => {
     return (
         <nav className="menu-lateral">
             <ul>
-                <li></li><li></li><li></li><li></li><li></li><li></li>
+                <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
                 <li onClick={() => toggleSubmenu('usuarios')}>
                     <FaUsers className="icon" /> {/* Ícone para Usuários */}
                     Usuários
@@ -40,14 +40,6 @@ const MenuLateral = () => {
                     <ul className={openSubmenus['tiposUtilizador'] ? 'submenu open' : 'submenu'}>
                         <li><NavLink to="/promover-tipoutilizador">Promover Tipos de Utilizador</NavLink></li>
                     </ul>
-                </li>
-                <li>
-                    <NavLink to="/perfil" className="menu-link">
-                        <div className="menu-item">
-                            <FaUser className="icon" /> {/* Ícone para Perfil */}
-                            Perfil
-                        </div>
-                    </NavLink>
                 </li>
             </ul>
         </nav>

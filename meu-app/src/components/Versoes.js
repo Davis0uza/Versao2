@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral'; 
+import AreaGestorProdutos from './AreaGestorProdutos'; 
 
 function Versoes() {
   const [versoes, setVersoes] = useState([]);
@@ -109,7 +109,7 @@ function Versoes() {
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-3">
-          <MenuLateral />
+          <AreaGestorProdutos />
         </div>
         <div className="col-md-12">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}

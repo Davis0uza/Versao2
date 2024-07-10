@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { FaSearch, FaTrash, FaChevronDown, FaChevronUp, FaPlus, FaEdit, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/Produtos.css';
-import MenuLateral from './MenuLateral';
+import AreaGestorProdutos from './AreaGestorProdutos';
 
 function Produtos() {
   const [produtos, setProdutos] = useState([]);
@@ -151,7 +151,7 @@ function Produtos() {
 
   return (
     <div className="produtos-container">
-      <MenuLateral/>
+      <AreaGestorProdutos/>
       <div className="produtos-header">
         <h1>Produtos
           <Link to="/adicionar-produto">

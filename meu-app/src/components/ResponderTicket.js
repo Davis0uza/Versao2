@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AreaGestorProdutos from './AreaGestorProdutos';
 
 const ResponderTicket = () => {
   const [admins, setAdmins] = useState([]);
@@ -54,6 +55,7 @@ const ResponderTicket = () => {
 
   return (
     <div>
+      <AreaGestorProdutos></AreaGestorProdutos>
       <h2>Responder Ticket</h2>
       <div>
         <label>Logado como:</label>

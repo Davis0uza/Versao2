@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral'; // Importando o componente do menu lateral
+import AreaGestorProdutos from './AreaGestorProdutos'; // Importando o componente do menu lateral
 
 function Tickets() {
   const [tickets, setTickets] = useState([]);
@@ -45,7 +45,7 @@ function Tickets() {
 
   return (
     <div className="container mt-5">
-      <MenuLateral />
+      <AreaGestorProdutos />
       <div className="row">
         <div className="col">
           <h1 style={{ color: '#164375', fontWeight: 'bold' }} className="mb-4">Tickets</h1>

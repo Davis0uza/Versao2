@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AreaGestorProdutos from './AreaGestorProdutos';
 
 const Dlcs = () => {
   const [dlcs, setDlcs] = useState([]);
@@ -143,6 +144,7 @@ const Dlcs = () => {
 
   return (
     <div>
+       <AreaGestorProdutos></AreaGestorProdutos>
       <h1>DLCs</h1>
       <Link to="/adicionar-dlc">
         <button>Adicionar</button>

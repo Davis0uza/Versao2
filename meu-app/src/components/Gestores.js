@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button, ListGroup, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral';
+import AreaAdmin from './AreaAdmin';
 
 function Gestores() {
   const [gestores, setGestores] = useState([]);
@@ -53,7 +53,7 @@ function Gestores() {
 
   return (
     <Container className="mt-5">
-      <MenuLateral/>
+      <AreaAdmin/>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 style={{ color: '#164375', fontWeight: 'bold' }}>Gestores</h1>
         <Link to="/adicionar-gestor">

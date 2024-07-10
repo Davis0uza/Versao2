@@ -16,21 +16,24 @@ const AreaGestorComprador = () => {
     return (
         <nav className="menu-lateral">
             <ul>
-                <li></li><li></li><li></li><li></li><li></li><li></li>
-                <li onClick={() => toggleSubmenu('usuarios')}>
-                    <FaBoxOpen className="icon" /> {/* Ícone para Usuários */}
+               <br></br><br></br><br></br><br></br><br></br><br></br>
+                <li onClick={() => toggleSubmenu('produtos')}>
+                    <FaBoxOpen  className="icon" /> {/* Ícone para Usuários */}
                     Produtos
-                    <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
-                        <li><NavLink to="/usuarios">Listar Produtos</NavLink></li>
+                    <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
+                        <li><NavLink to="/produtos">Listar Produtos</NavLink></li>
                     </ul>
-                    <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
+                    <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
                         <li><NavLink to="/versoes">Versões</NavLink></li>
                     </ul>
-                    <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
+                    <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
                         <li><NavLink to="/categorias">Categorias</NavLink></li>
                     </ul>
-                    <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
+                    <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
                         <li><NavLink to="/adicionar-stock">Adicionar Stock</NavLink></li>
+                    </ul>
+                    <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
+                        <li><NavLink to="/efetuar-compra">Atribuir Produtos</NavLink></li>
                     </ul>
                 </li>
                 <li onClick={() => toggleSubmenu('dlcs')}>
@@ -38,13 +41,6 @@ const AreaGestorComprador = () => {
                     Add-ons
                     <ul className={openSubmenus['dlcs'] ? 'submenu open' : 'submenu'}>
                         <li><NavLink to="/dlcs">Listar Add-ons</NavLink></li>
-                    </ul>
-                </li>
-                <li onClick={() => toggleSubmenu('produtos')}>
-                    <FaPlusSquare className="icon" /> {/* Ícone para Gestores */}
-                     Produtos
-                     <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
-                        <li><NavLink to="/adicionarproduto">Atribuir Produtos</NavLink></li>
                     </ul>
                 </li>
                 <li onClick={() => toggleSubmenu('tickets')}>

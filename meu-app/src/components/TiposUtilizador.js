@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AreaAdmin from './AreaAdmin';
 
 function TiposUtilizador() {
   const [tipos, setTipos] = useState([]);
@@ -49,6 +50,7 @@ function TiposUtilizador() {
 
   return (
     <div>
+      <AreaAdmin/>
       <h1>Tipos de Utilizador</h1>
       <Link to="/adicionar-tipo-utilizador">
         <button>Adicionar</button>

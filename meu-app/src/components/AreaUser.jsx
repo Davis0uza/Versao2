@@ -16,7 +16,7 @@ const AreaUser = () => {
     return (
         <nav className="menu-lateral">
             <ul>
-                <li></li><li></li><li></li><li></li><li></li><li></li>
+               <br></br><br></br><br></br><br></br><br></br><br></br>
                 <li onClick={() => toggleSubmenu('tickets')}>
                     
                         <FaTicketAlt className="icon" /> {/* Ícone para Usuários */}
