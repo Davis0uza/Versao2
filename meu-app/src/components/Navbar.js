@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaBook, FaSearch, FaTrash } from 'react-icons/fa';
 import '../styles/Navbar.css';
@@ -43,18 +43,22 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
     <div className="navbar-container">
       <div className="navbar-content">
         <div className="top-nav">
-          <Link to="/sobre">Sobre</Link>
-          <Link to="/contactos">Contactos</Link>
           {user ? (
             <>
-              <span>Bem-vindo, {user.nome}</span>
-              <button onClick={handleLogout} className="btn btn-link">Logout</button>
+              <span className="welcome-text">Seja bem-vindo, {user.nome}</span>
+              <div className="nav-links">
+                <span className="logout-link" onClick={handleLogout}>Logout</span>
+                <Link to="/contactos">Contactos</Link>
+                <Link to="/sobre">Sobre</Link>
+              </div>
             </>
           ) : (
-            <>
-              <Link to="/register">Registar</Link>
+            <div className="nav-links">
               <Link to="/login">Login</Link>
-            </>
+              <Link to="/register">Registar</Link>
+              <Link to="/contactos">Contactos</Link>
+              <Link to="/sobre">Sobre</Link>
+            </div>
           )}
         </div>
         <div className="main-nav">
@@ -84,7 +88,9 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
                           <span>{product.nome}</span>
                           <span>{product.preco.toFixed(2)}€ x {product.quantity}</span>
                         </div>
-                        <button onClick={() => removeFromCart(product)}>Remover</button>
+                        <button className="remove-item-btn" onClick={() => removeFromCart(product)}>
+                          <FaTrash />
+                        </button>
                       </div>
                     ))}
                   </div>
@@ -92,10 +98,10 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
                     <strong>Total: {calculateTotal()}€</strong>
                   </div>
                   <button className="clear-cart-btn" onClick={clearCart}>
-                    <FaTrash /> Limpar Carrinho
+                    Limpar Carrinho
                   </button>
                   <button className="checkout-btn" onClick={() => alert('Comprar Agora')}>
-                    <FaShoppingCart /> Comprar Agora
+                    Comprar Agora
                   </button>
                 </div>
               )}

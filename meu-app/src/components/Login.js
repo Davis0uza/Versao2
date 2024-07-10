@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext';
 import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,6 +24,7 @@ function Login() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      login(data.user);
       navigate('/');
     } catch (error) {
       console.error('Error:', error);
