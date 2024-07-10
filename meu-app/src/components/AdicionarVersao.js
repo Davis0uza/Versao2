@@ -47,7 +47,7 @@ function AdicionarVersao() {
         <div className="col-md-3">
           <MenuLateral />
         </div>
-        <div className="col-md-9 ">
+        <div className="col-md-12 ">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
             <h1>Adicionar Versão</h1>
             <form onSubmit={handleSubmit}>

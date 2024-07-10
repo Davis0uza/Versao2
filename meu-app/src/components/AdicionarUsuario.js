@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import MenuLateral from './MenuLateral';
-import '../styles/AdicionarUsuario.css'; // Importando o arquivo CSS criado
+import '../styles/AdicionarUsuario.css';
 
 function AdicionarUsuario() {
   const [nome, setNome] = useState('');

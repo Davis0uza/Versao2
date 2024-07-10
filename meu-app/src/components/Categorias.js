@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import AreaAdmin from './AreaAdmin';
+import { FaTrash } from 'react-icons/fa'; 
 
-function Categorias() {
+const Categorias = () => {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/categorias').then(response => {
-      setCategorias(response.data);
-    }).catch(error => {
-      console.error("Erro ao buscar dados de categorias:", error);
-    });
+    axios.get('http://localhost:3000/categorias')
+      .then(response => {
+        setCategorias(response.data);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar dados de categorias:", error);
+      });
   }, []);
 
   const handleDelete = (id) => {
@@ -48,21 +52,30 @@ function Categorias() {
   };
 
   return (
-    <div>
-      <h1>Categorias</h1>
-      <Link to="/adicionar-categoria">
-        <button>Adicionar</button>
-      </Link>
-      <ul>
-        {categorias.map(categoria => (
-          <li key={categoria.id_categoria}>
-            ID Categoria: {categoria.id_categoria}, Nome: {categoria.nome}
-            <button onClick={() => handleDelete(categoria.id_categoria)}>Remover</button>
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-5">
+      <AreaAdmin />
+      <div className="categorias-wrapper">
+        <h1 style={{ color: '#164375', fontWeight: 'bold' }} className="mb-4">Categorias</h1>
+        <Link to="/adicionar-categoria" className="btn btn-primary mb-4">
+          Adicionar Categoria
+        </Link>
+        <ul className="list-group">
+          {categorias.map(categoria => (
+            <li key={categoria.id_categoria} className="list-group-item d-flex justify-content-between align-items-center">
+              <span>ID Categoria: {categoria.id_categoria}</span>
+              <span>Nome: {categoria.nome}</span>
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDelete(categoria.id_categoria)}
+              >
+                <FaTrash /> Remover
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-}
+};
 
 export default Categorias;

@@ -1,6 +1,3 @@
-body {
-  margin: 0;
-}
 
 .menu-lateral {
   flex: 0 0 250px; /* Ajuste a largura do menu lateral conforme necessário */
@@ -152,7 +149,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .usuarios-list li .user-info .delete-button:hover {
