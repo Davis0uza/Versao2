@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, NavLink } from 'react-router-dom';
-import { FaShoppingCart, FaBook, FaSearch, FaTrash, FaTicketAlt, FaBoxes, FaUser, FaUsers, FaUserShield, FaUserCog, FaBoxOpen, FaPuzzlePiece, FaPlusSquare } from 'react-icons/fa';
+import { FaShoppingCart, FaBook, FaSearch, FaTrash, FaTicketAlt, FaBoxes, FaUser, FaUsers, FaUserShield, FaUserCog, FaBoxOpen, FaPuzzlePiece, FaPlusSquare, FaHistory } from 'react-icons/fa';
 import '../styles/Navbar.css';
 import logo from '../Assets/logo4tec.jpeg';
 import { AuthContext } from '../context/AuthContext';
@@ -162,6 +162,13 @@ const AdminMenu = () => {
             <li><NavLink to="/promover-tipoutilizador">Promover Tipos de Utilizador</NavLink></li>
           </ul>
         </li>
+        <li onClick={() => toggleSubmenu('vendas')}>
+          <FaShoppingCart  className="icon" /> {/* Ícone para Gestores */}
+          Vendas
+          <ul className={openSubmenus['vendas'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/carrinho">Carrinho</NavLink></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   );
@@ -193,6 +200,14 @@ const UserMenu = () => {
             <div className="menu-item">
               <FaBoxes className="icon" /> {/* Ícone para Inventário */}
               <span className="menu-text">Inventário</span>
+            </div>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/carrinho-gestores" className="menu-link">
+            <div className="menu-item">
+              <FaHistory className="icon" /> {/* Ícone para Perfil */}
+              Histórico  de Compras
             </div>
           </NavLink>
         </li>
@@ -247,6 +262,14 @@ const GestorMenu = () => {
             <li><NavLink to="/tickets">Listar Tickets</NavLink></li>
             <li><NavLink to="/responderticket">Responder Tickets</NavLink></li>
           </ul>
+        </li>
+        <li>
+          <NavLink to="/carrinho-gestores" className="menu-link">
+            <div className="menu-item">
+              <FaHistory className="icon" /> {/* Ícone para Perfil */}
+              Histórico  de Compras
+            </div>
+          </NavLink>
         </li>
         <li>
           <NavLink to="/perfil" className="menu-link">

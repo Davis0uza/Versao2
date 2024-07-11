@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import image1 from '../Assets/settings.svg';
+import image1 from '../Assets/settings.982x1024.png';
 import '../styles/Sobre.css';
+import Footer from './Footer';
 
 function Sobre() {
     return (
@@ -11,7 +12,7 @@ function Sobre() {
                     <Col md={8} className="text-center text-white">
                         <h1 className="mb-4">Simplificamos o processo de transação!</h1>
                         <p className="lead">
-                            Este site baseia-se numa plataforma que facilita não apenas a compra de jogos digitais, mas também a sua revenda entre os usuários, proporcionando um ambiente seguro, confiável e conveniente para transações online.
+                            Este site baseia-se numa plataforma que facilita não apenas a compra de jogos digitais, mas também a sua revenda entre os utilizadores, proporcionando um ambiente seguro, confiável e conveniente para transações online.
                         </p>
                     </Col>
                 </Row>
@@ -29,6 +30,7 @@ function Sobre() {
                     </Col>
                 </Row>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

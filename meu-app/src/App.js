@@ -34,6 +34,7 @@ import Contactos from './components/Contactos';
 import Register from './components/Register';
 import Sobre from './components/Sobre';
 import './App.css';
+import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 
@@ -110,6 +111,7 @@ function App() {
           <Route path="/cards" element={<PrivateRoute element={Cards_destaques} addToCart={addToCart} />} />
           <Route path="/contactos" element={<Contactos />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </AuthProvider>

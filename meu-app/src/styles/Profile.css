@@ -1,0 +1,36 @@
+.profile-box {
+  max-width: 600px;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.label-style {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #043873;
+  border-radius: 5px;
+  text-align: center;
+  background-color: white;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-button, .delete-button {
+  z-index: 1000;
+}
+
+.small-button {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+.mb-4 {
+  color: #043873;
+}

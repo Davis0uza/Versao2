@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AreaGestorProdutos from './AreaGestorProdutos'; 
 
 const CarrinhoGestores = () => {
   const [users, setUsers] = useState([]);
@@ -34,30 +35,45 @@ const CarrinhoGestores = () => {
   }, [selectedUser]);
 
   return (
-    <div>
-      <h2>Carrinho dos Gestores</h2>
-      <div>
-        <label>Usuário:</label>
-        <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
-          <option value="">Selecione um usuário</option>
-          {users.map(user => (
-            <option key={user.id_user} value={user.id_user}>
-              {user.nome} ({user.id_user})
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <h3>Carrinhos de Compras</h3>
-        <ul>
-          {carrinhos.map(carrinho => (
-            <li key={carrinho.id_carrinho}>
-              <p>Usuário: {carrinho.id_user}</p>
-              <p>Produtos: {carrinho.produtos}</p>
-              <p>Data: {new Date(carrinho.data).toLocaleDateString()}</p>
-            </li>
-          ))}
-        </ul>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-3">
+          <AreaGestorProdutos />
+        </div>
+        <div className="col-md-12">
+          <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
+            <h2 style={{ color: '#164375', fontWeight: 'bold' }}>Carrinho dos Gestores</h2>
+            <div className="mb-3">
+              <label htmlFor="user" className="form-label">Usuário:</label>
+              <select 
+                id="user" 
+                className="form-select" 
+                value={selectedUser} 
+                onChange={(e) => setSelectedUser(e.target.value)} 
+                required
+              >
+                <option value="">Selecione um usuário</option>
+                {users.map(user => (
+                  <option key={user.id_user} value={user.id_user}>
+                    {user.nome} ({user.id_user})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <h3 style={{ color: '#164375', fontWeight: 'bold' }}>Carrinhos de Compras</h3>
+              <ul className="list-group">
+                {carrinhos.map(carrinho => (
+                  <li key={carrinho.id_carrinho} className="list-group-item">
+                    <p>Usuário: {carrinho.id_user}</p>
+                    <p>Produtos: {carrinho.produtos}</p>
+                    <p>Data: {new Date(carrinho.data).toLocaleDateString()}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

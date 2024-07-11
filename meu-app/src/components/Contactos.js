@@ -1,11 +1,13 @@
 import React from 'react';
 import '../styles/Contactos.css';
+import Footer from './Footer';
 import heroImage from '../Assets/Contactos-photo.jpg'; 
 import { MdOutlineEmail } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
 
 const Contactos = () => {
   return (
+    <div>
     <div className="contact-page">
       <div className="hero-image-container">
         <img src={heroImage} alt="Hero" className="hero-image" />
@@ -20,6 +22,8 @@ const Contactos = () => {
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };
