@@ -32,6 +32,7 @@ import EditarUser from './components/EditarUser';
 import Cards_destaques from './components/CadsDestaques';
 import Contactos from './components/Contactos';
 import Register from './components/Register';
+import Sobre from './components/Sobre';
 import './App.css';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -108,6 +109,7 @@ function App() {
           <Route path="/editaruser/:id" element={<PrivateRoute element={EditarUser} />} />
           <Route path="/cards" element={<PrivateRoute element={Cards_destaques} addToCart={addToCart} />} />
           <Route path="/contactos" element={<Contactos />} />
+          <Route path="/sobre" element={<Sobre />} />
         </Routes>
       </div>
     </AuthProvider>

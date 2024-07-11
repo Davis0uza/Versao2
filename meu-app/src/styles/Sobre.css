@@ -1,0 +1,95 @@
+.sobre-container {
+    background: url('../Assets/building.jpg') no-repeat center center; /* Update the path to your background image */
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    color: #fff;
+}
+
+.sobre-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the overlay color and opacity as needed */
+    z-index: 1;
+}
+
+.text-center {
+    z-index: 2;
+    position: relative;
+}
+
+.content-section {
+    z-index: 2;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.content-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.mb-4 {
+    font-weight: bold;
+    color: #97BFFF;
+}
+
+.text-descritivo {
+    margin-top: 50px;
+    position: relative;
+    overflow: hidden;
+    padding-left: 5%; /* Shift the text-descritivo section to the left */
+}
+
+.text-descritivo .image-column {
+    position: absolute;
+    right: -35%; /* Adjust this value to control how much of the image is off the page */
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.content-image {
+    max-width: 100%; /* Adjust this value to control the size of the image */
+    height: auto;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+    .text-descritivo .image-column {
+        right: -35%; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .text-descritivo .image-column {
+        right: -35%; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .text-descritivo .image-column {
+        position: relative;
+        right: -35%;
+        margin-top: 20px;
+    }
+    
+    .content-image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-descritivo {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
