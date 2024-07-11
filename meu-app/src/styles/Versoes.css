@@ -1,0 +1,155 @@
+/* Versoes.css */
+.versoes-container {
+    margin-left: 270px; /* Ajustar para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .versoes-header,
+  .versoes-pagination {
+    background-color: #164375; /* Azul escuro */
+    padding: 10px;
+    border-radius: 25px; /* Bordas arredondadas */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .versoes-header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+  }
+  
+  .versoes-header .add-button {
+    margin-left: 8px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* Ajustar tamanho do ícone */
+  }
+  
+  .versoes-header .add-button:hover {
+    background-color: #218838;
+  }
+  
+  .versoes-header .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .versoes-header input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .versoes-header button.search-button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .versoes-header button.search-button:hover {
+    background-color: #1d5a90;
+  }
+  
+  .versoes-header select {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .versoes-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Espaçamento entre a barra com título e o primeiro elemento da lista */
+  }
+  
+  .versoes-list li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 50px; /* Bordas completamente arredondadas */
+    border: 3px solid #164375; /* Borda azul escuro de 3px */
+    margin-bottom: 15px;
+    background-color: #fff;
+  }
+  
+  .versoes-list li .versao-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .versoes-list li .versao-info .primary-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .versoes-list li .versao-info .primary-info p {
+    margin: 0 10px;
+  }
+  
+  .versoes-list li .action-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .versoes-list li .versao-info .delete-button {
+    padding: 10px;
+    background-color: #d33;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  
+  .versoes-list li .versao-info .delete-button:hover {
+    background-color: #b32424;
+  }
+  
+  .versoes-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .versoes-pagination button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Bordas arredondadas */
+  }
+  
+  .versoes-pagination button:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+  }
+  
+  .versoes-pagination span {
+    font-weight: bold;
+  }
+  

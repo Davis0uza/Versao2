@@ -14,7 +14,7 @@ function Usuarios() {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedUser, setExpandedUser] = useState(null);
   const navigate = useNavigate();
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
 
   useEffect(() => {
     axios.get('http://localhost:3000/users').then(response => {
@@ -130,7 +130,7 @@ function Usuarios() {
       <AreaAdmin />
       <div className="usuarios-container">
         <div className="usuarios-header">
-          <h1>Usuários
+          <h1>Users
             <Link to="/adicionar-usuario">
               <button className="add-button">
                 <FaPlus />
@@ -163,8 +163,9 @@ function Usuarios() {
                 <div className="primary-info">
                   <img src={`http://localhost:3000/uploads/${user.fotoperfil}`} alt={user.nome} />
                   <p>ID: {user.id_user}</p>
-                  <p>Nome: {user.nome}</p>
+                  <p> {user.nome}</p>
                   <p>Email: {user.email}</p>
+                  <p>Tipo: {getTipoNome(user.id_tipo)}</p>
                   <button className="toggle-button" onClick={() => toggleExpand(user.id_user)}>
                     {expandedUser === user.id_user ? <FaChevronUp /> : <FaChevronDown />}
                   </button>
@@ -182,7 +183,6 @@ function Usuarios() {
                 <p>Data de Nascimento: {user.datanasc}</p>
                 <p>Telemóvel: {user.telemovel}</p>
                 <p>Morada: {user.morada}</p>
-                <p>Tipo: {getTipoNome(user.id_tipo)}</p>
                 <p>NIF: {user.nif}</p>
               </div>
             </li>

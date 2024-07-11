@@ -16,7 +16,7 @@ function Produtos() {
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedProduto, setExpandedProduto] = useState(null);
   const navigate = useNavigate();
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   useEffect(() => {
     axios.get('http://localhost:3000/produtos/all').then(response => {
@@ -151,7 +151,7 @@ function Produtos() {
 
   return (
     <div className="produtos-container">
-      <AreaGestorProdutos/>
+      <AreaGestorProdutos />
       <div className="produtos-header">
         <h1>Produtos
           <Link to="/adicionar-produto">
@@ -184,7 +184,7 @@ function Produtos() {
           <li key={produto.id_produto} className={expandedProduto === produto.id_produto ? 'expanded' : ''}>
             <div className="produto-info">
               <div className="primary-info">
-                <img src={`http://localhost:3000/uploads/${produto.fotoproduto}`} alt={produto.fotoproduto} />
+                <img src={`http://localhost:3000/uploads/${produto.fotoproduto}`} alt={produto.nome} />
                 <p>ID: {produto.id_produto}</p>
                 <p>Nome: {produto.nome}</p>
                 <p>Categoria: {getCategoriaNome(produto.id_categoria)}</p>

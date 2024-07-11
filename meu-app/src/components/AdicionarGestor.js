@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, ListGroup } from 'react-bootstrap';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral';
+import AreaAdmin from './AreaAdmin';
+import '../styles/AdicionarGestor.css';
+import { FaUserPlus, FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa';
 
 function AdicionarGestor() {
   const [usuarios, setUsuarios] = useState([]);
   const [gestores, setGestores] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,20 +70,99 @@ function AdicionarGestor() {
     });
   };
 
+  const handleSortChange = (event) => {
+    setSortCriteria(event.target.value);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handlePageChange = (direction) => {
+    if (direction === 'next') {
+      setCurrentPage(currentPage + 1);
+    } else if (direction === 'prev') {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const sortedAndFilteredUsuarios = () => {
+    let filteredUsuarios = usuarios.filter(usuario =>
+      usuario.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    switch (sortCriteria) {
+      case 'id_asc':
+        filteredUsuarios.sort((a, b) => a.id_user - b.id_user);
+        break;
+      case 'id_desc':
+        filteredUsuarios.sort((a, b) => b.id_user - a.id_user);
+        break;
+      case 'name_asc':
+        filteredUsuarios.sort((a, b) => a.nome.localeCompare(b.nome));
+        break;
+      case 'name_desc':
+        filteredUsuarios.sort((a, b) => b.nome.localeCompare(a.nome));
+        break;
+      default:
+        break;
+    }
+    return filteredUsuarios;
+  };
+
+  const paginatedUsuarios = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return sortedAndFilteredUsuarios().slice(startIndex, endIndex);
+  };
+
+  const totalPages = Math.ceil(sortedAndFilteredUsuarios().length / itemsPerPage);
+
   return (
-    <div>
-      <MenuLateral />
-      <Container style={{ marginTop: '20px', marginLeft: '260px' }}>
-        <h1 style={{ color: '#164375', fontWeight: 'bold' }}>Adicionar Gestores</h1>
-        <ListGroup>
-          {usuarios.filter(usuario => !usuario.id_gestor).map(usuario => (
-            <ListGroup.Item key={usuario.id_user} className="d-flex justify-content-between align-items-center">
-              {usuario.nome}
-              <Button variant="primary" onClick={() => handlePromote(usuario.id_user, usuario.nome)}>Promover</Button>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </Container>
+    <div className="adicionar-gestor-container">
+      <AreaAdmin />
+      <div className="adicionar-gestor-header">
+        <h1>Adicionar Gestores</h1>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button className="search-button" onClick={() => setSearchTerm('')}>
+            <FaSearch />
+          </button>
+          <select value={sortCriteria} onChange={handleSortChange}>
+            <option value="">Ordenar por</option>
+            <option value="id_asc">ID Crescente</option>
+            <option value="id_desc">ID Decrescente</option>
+            <option value="name_asc">Ordem Alfabética Crescente</option>
+            <option value="name_desc">Ordem Alfabética Decrescente</option>
+          </select>
+        </div>
+      </div>
+      <ul className="usuarios-list">
+        {paginatedUsuarios().filter(usuario => !usuario.id_gestor).map(usuario => (
+          <li key={usuario.id_user}>
+            <div className="usuario-info">
+              <p>ID: {usuario.id_user}, Nome: {usuario.nome}</p>
+              <button className="promote-button" onClick={() => handlePromote(usuario.id_user, usuario.nome)}>
+                <FaUserPlus /> Promover
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="usuarios-pagination">
+        <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
+          <FaArrowLeft /> Anterior
+        </button>
+        <span>{currentPage}/{totalPages}</span>
+        <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
+          Próxima <FaArrowRight />
+        </button>
+      </div>
     </div>
   );
 }

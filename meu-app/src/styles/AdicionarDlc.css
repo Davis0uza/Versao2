@@ -1,0 +1,64 @@
+/* AdicionarDlc.css */
+.adicionar-dlc-container {
+    margin-left: 270px; /* Ajuste para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .adicionar-dlc-header {
+    background-color: #164375; /* Azul escuro */
+    padding: 10px;
+    border-radius: 25px; /* Bordas arredondadas */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+  }
+  
+  .adicionar-dlc-header h2 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .adicionar-dlc-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 25px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adicionar-dlc-form div {
+    margin-bottom: 15px;
+  }
+  
+  .adicionar-dlc-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .adicionar-dlc-form input,
+  .adicionar-dlc-form select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .adicionar-dlc-form button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Bordas arredondadas */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .adicionar-dlc-form button:hover {
+    background-color: #218838;
+  }
+  

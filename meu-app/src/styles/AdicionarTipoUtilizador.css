@@ -1,0 +1,52 @@
+/* AdicionarTipoUtilizador.css */
+.adicionar-container {
+    margin-left: 270px; /* Ajustar para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .adicionar-title {
+    color: #164375;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .adicionar-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #164375;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0e3b8d;
+  }
+  

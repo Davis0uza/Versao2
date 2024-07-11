@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaBook, FaSearch, FaTrash } from 'react-icons/fa';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
+import { FaShoppingCart, FaBook, FaSearch, FaTrash, FaTicketAlt, FaBoxes, FaUser, FaUsers, FaUserShield, FaUserCog, FaBoxOpen, FaPuzzlePiece, FaPlusSquare } from 'react-icons/fa';
 import '../styles/Navbar.css';
 import logo from '../Assets/logo4tec.jpeg';
 import { AuthContext } from '../context/AuthContext';
@@ -37,6 +37,19 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
         );
       }
     });
+  };
+
+  const renderMenu = () => {
+    switch (user?.id_tipo) {
+      case 1:
+        return <AdminMenu />;
+      case 2:
+        return <UserMenu />;
+      case 5:
+        return <GestorMenu />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -109,7 +122,142 @@ const Navbar = ({ cart, removeFromCart, clearCart }) => {
           </div>
         </div>
       </div>
+      {renderMenu()}
     </div>
+  );
+};
+
+const AdminMenu = () => {
+  const [openSubmenus, setOpenSubmenus] = useState({});
+
+  const toggleSubmenu = (menu) => {
+    setOpenSubmenus((prevState) => ({
+      ...prevState,
+      [menu]: !prevState[menu],
+    }));
+  };
+
+  return (
+    <nav className="menu-lateral">
+      <ul>
+        <li onClick={() => toggleSubmenu('usuarios')}>
+          <FaUsers className="icon" /> {/* Ícone para Usuários */}
+          Users
+          <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/usuarios">Listar Users</NavLink></li>
+          </ul>
+        </li>
+        <li onClick={() => toggleSubmenu('gestores')}>
+          <FaUserShield className="icon" /> {/* Ícone para Gestores */}
+          Compradores
+          <ul className={openSubmenus['gestores'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/gestores">Autorizados a Comprar</NavLink></li>
+          </ul>
+        </li>
+        <li onClick={() => toggleSubmenu('tiposUtilizador')}>
+          <FaUserCog className="icon" /> {/* Ícone para Tipos de Utilizador */}
+          Tipos de Utilizador
+          <ul className={openSubmenus['tiposUtilizador'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/tipos-utilizador">Listar Tipos de Utilizador</NavLink></li>
+            <li><NavLink to="/promover-tipoutilizador">Promover Tipos de Utilizador</NavLink></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+const UserMenu = () => {
+  const [openSubmenus, setOpenSubmenus] = useState({});
+
+  const toggleSubmenu = (submenu) => {
+    setOpenSubmenus((prevState) => ({
+      ...prevState,
+      [submenu]: !prevState[submenu]
+    }));
+  };
+
+  return (
+    <nav className="menu-lateral">
+      <ul>
+        <li onClick={() => toggleSubmenu('tickets')}>
+          <FaTicketAlt className="icon" /> {/* Ícone para Usuários */}
+          Tickets
+          <ul className={openSubmenus['tickets'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/novo-ticket">Novo Ticket</NavLink></li>
+            <li><NavLink to="/listar-respostas">Respostas</NavLink></li>
+          </ul>
+        </li>
+        <li>
+          <NavLink to="/inventario" className="menu-link">
+            <div className="menu-item">
+              <FaBoxes className="icon" /> {/* Ícone para Inventário */}
+              <span className="menu-text">Inventário</span>
+            </div>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/perfil" className="menu-link">
+            <div className="menu-item">
+              <FaUser className="icon" /> {/* Ícone para Perfil */}
+              <span className="menu-text">Perfil</span>
+            </div>
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+const GestorMenu = () => {
+  const [openSubmenus, setOpenSubmenus] = useState({});
+
+  const toggleSubmenu = (menu) => {
+    setOpenSubmenus((prevState) => ({
+      ...prevState,
+      [menu]: !prevState[menu],
+    }));
+  };
+
+  return (
+    <nav className="menu-lateral">
+      <ul>
+        <li onClick={() => toggleSubmenu('produtos')}>
+          <FaBoxOpen className="icon" /> {/* Ícone para Usuários */}
+          Produtos
+          <ul className={openSubmenus['produtos'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/produtos">Listar Produtos</NavLink></li>
+            <li><NavLink to="/versoes">Versões</NavLink></li>
+            <li><NavLink to="/categorias">Categorias</NavLink></li>
+            <li><NavLink to="/adicionar-stock">Adicionar Stock</NavLink></li>
+            <li><NavLink to="/efetuar-compra">Atribuir Produtos</NavLink></li>
+          </ul>
+        </li>
+        <li onClick={() => toggleSubmenu('dlcs')}>
+          <FaPuzzlePiece className="icon" /> {/* Ícone para Gestores */}
+          Add-ons
+          <ul className={openSubmenus['dlcs'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/dlcs">Listar Add-ons</NavLink></li>
+          </ul>
+        </li>
+        <li onClick={() => toggleSubmenu('tickets')}>
+          <FaTicketAlt className="icon" /> {/* Ícone para Usuários */}
+          Tickets
+          <ul className={openSubmenus['tickets'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/tickets">Listar Tickets</NavLink></li>
+            <li><NavLink to="/responderticket">Responder Tickets</NavLink></li>
+          </ul>
+        </li>
+        <li>
+          <NavLink to="/perfil" className="menu-link">
+            <div className="menu-item">
+              <FaUser className="icon" /> {/* Ícone para Perfil */}
+              Perfil
+            </div>
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

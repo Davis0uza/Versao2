@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import MenuLateral from './MenuLateral'; 
+import MenuLateral from './MenuLateral';
+import { AuthContext } from '../context/AuthContext';
 
 const NovoTicket = () => {
-  const [users, setUsers] = useState([]);
   const [form, setForm] = useState({
     descricao: '',
-    id_user: '',
   });
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar usuários:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const { user } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setForm({
@@ -36,7 +23,7 @@ const NovoTicket = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/tickets', form);
+      await axios.post('http://localhost:3000/tickets', { ...form, id_user: user.id_user });
       Swal.fire(
         'Sucesso!',
         'O ticket foi adicionado com sucesso.',
@@ -68,23 +55,6 @@ const NovoTicket = () => {
             onChange={handleChange}
             className="form-control"
           />
-        </div>
-        <div className="form-group" >
-          <label htmlFor="id_user">Usuário:</label>
-          <select style={{ borderColor: '#164375', borderWidth: '2px' }}
-            id="id_user"
-            name="id_user"
-            value={form.id_user}
-            onChange={handleChange}
-            className="form-control"
-          >
-            <option value="">Selecione um usuário</option>
-            {users.map((user) => (
-              <option key={user.id_user} value={user.id_user}>
-                {user.nome}
-              </option>
-            ))}
-          </select>
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-primary mt-3">

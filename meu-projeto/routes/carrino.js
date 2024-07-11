@@ -3,14 +3,23 @@ const router = express.Router();
 const Carrino = require('../models/Carrino');
 
 // Rota GET para listar todos os carrinhos
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    const carrino = await Carrino.findAll();
-    console.log("Carrinhos:", carrino); // Adicionar log
-    res.json(carrino);
+    const { id_user, produtos } = req.body; // produtos é um array de objetos { nome, preco }
+    const produtosFormatados = produtos.map(produto => `${produto.nome} - ${produto.preco}`).join(', ');
+
+    console.log('Recebido id_user:', id_user);
+    console.log('Recebido produtos:', produtosFormatados);
+
+    const novoCarrinho = await Carrino.create({
+      id_user,
+      data: new Date(),
+      produtos: produtosFormatados
+    });
+    res.status(201).json(novoCarrinho);
   } catch (error) {
-    console.error("Erro ao buscar carrinhos:", error);
-    res.status(500).json({ error: 'Erro ao buscar carrinhos' });
+    console.error("Erro ao adicionar item ao carrinho:", error);
+    res.status(500).json({ error: 'Erro ao adicionar item ao carrinho' });
   }
 });
 

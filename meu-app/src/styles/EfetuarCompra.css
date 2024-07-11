@@ -1,0 +1,208 @@
+/* EfetuarCompra.css */
+.efetuar-compra-container {
+  margin-left: 270px; /* Ajuste para que não fique atrás do menu lateral */
+  padding: 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh; /* Para cobrir a altura completa da página */
+}
+
+.efetuar-compra-header {
+  background-color: #164375; /* Azul escuro */
+  padding: 10px;
+  border-radius: 25px; /* Bordas arredondadas */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.efetuar-compra-header h1 {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.efetuar-compra-header .search-container {
+  display: flex;
+  align-items: center;
+}
+
+.efetuar-compra-header input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.efetuar-compra-header button.search-button {
+  padding: 8px 16px;
+  background-color: #2673b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.efetuar-compra-header button.search-button:hover {
+  background-color: #1d5a90;
+}
+
+.efetuar-compra-header select {
+  padding: 8px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.produtos-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px; /* Espaçamento entre a barra com título e o primeiro elemento da lista */
+}
+
+.produtos-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 50px; /* Bordas completamente arredondadas */
+  border: 3px solid #164375; /* Borda azul escuro de 3px */
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.produtos-list li .produto-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.produtos-list li .primary-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.produtos-list li .primary-info p {
+  margin: 0 10px;
+}
+
+.produtos-list li .action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.produtos-list li .qty-slider {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.produtos-list li .qty-input {
+  width: 50px;
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.produtos-list li .add-to-cart-button {
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; /* Ajustar tamanho do ícone */
+}
+
+.produtos-list li .add-to-cart-button:hover {
+  background-color: #218838;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-container button {
+  padding: 8px 16px;
+  background-color: #2673b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px; /* Bordas arredondadas */
+}
+
+.pagination-container button:disabled {
+  background-color: #a0c4e4;
+  cursor: not-allowed;
+}
+
+.pagination-container span {
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.carrinho-container {
+  margin-top: 20px;
+}
+
+.carrinho-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.carrinho-container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 50px; /* Bordas completamente arredondadas */
+  border: 3px solid #164375; /* Borda azul escuro de 3px */
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.carrinho-container li .remove-from-cart-button {
+  padding: 8px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; /* Ajustar tamanho do ícone */
+}
+
+.carrinho-container li .remove-from-cart-button:hover {
+  background-color: #c82333;
+}
+
+.carrinho-container .total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.carrinho-container .confirm-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px; /* Bordas arredondadas */
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.carrinho-container .confirm-button:hover {
+  background-color: #218838;
+}

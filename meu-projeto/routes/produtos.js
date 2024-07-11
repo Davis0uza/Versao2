@@ -205,7 +205,15 @@ router.post('/addStock', async (req, res) => {
 router.get('/sem-gestor', async (req, res) => {
   try {
     const produtos = await Produto.findAll({
-      where: { id_gestor: null }
+      where: { id_gestor: null },
+      attributes: [
+        'nome',
+        'descricao',
+        'preco',
+        'id_categoria',
+        [Sequelize.fn('COUNT', Sequelize.col('id_produto')), 'quantidade']
+      ],
+      group: ['nome', 'descricao', 'preco', 'id_categoria']
     });
     res.json(produtos);
   } catch (error) {

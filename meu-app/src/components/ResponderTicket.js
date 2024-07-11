@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AreaGestorProdutos from './AreaGestorProdutos';
+import { AuthContext } from '../context/AuthContext';
+import '../styles/ResponderTicket.css';
 
 const ResponderTicket = () => {
   const [admins, setAdmins] = useState([]);
@@ -9,6 +11,7 @@ const ResponderTicket = () => {
   const [selectedAdmin, setSelectedAdmin] = useState('');
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [response, setResponse] = useState('');
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get('http://localhost:3000/users')
@@ -54,10 +57,10 @@ const ResponderTicket = () => {
   };
 
   return (
-    <div>
-      <AreaGestorProdutos></AreaGestorProdutos>
-      <h2>Responder Ticket</h2>
-      <div>
+    <div className="responder-ticket-container">
+      <AreaGestorProdutos />
+      <h2 className="responder-ticket-title">Responder Ticket</h2>
+      <div className="dropdown-container">
         <label>Logado como:</label>
         <select value={selectedAdmin} onChange={(e) => setSelectedAdmin(e.target.value)}>
           <option value="">Selecione um administrador</option>
@@ -68,7 +71,7 @@ const ResponderTicket = () => {
           ))}
         </select>
       </div>
-      <div>
+      <div className="ticket-list-container">
         <h3>Tickets em Aberto</h3>
         <ul>
           {openTickets.map(ticket => (
@@ -79,7 +82,7 @@ const ResponderTicket = () => {
           ))}
         </ul>
       </div>
-      <div>
+      <div className="ticket-list-container">
         <h3>Tickets Pendentes</h3>
         <ul>
           {pendingTickets.map(ticket => (
@@ -91,7 +94,7 @@ const ResponderTicket = () => {
         </ul>
       </div>
       {selectedTicket && (
-        <div>
+        <div className="responder-ticket-form">
           <h3>Responder Ticket</h3>
           <div>
             <label>Enviado por:</label>

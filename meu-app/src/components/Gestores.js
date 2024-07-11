@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Button, ListGroup, Container } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaSearch, FaTrash, FaPlus, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import '../styles/Gestores.css';
 import AreaAdmin from './AreaAdmin';
 
 function Gestores() {
   const [gestores, setGestores] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
+  const itemsPerPage = 5;
 
   useEffect(() => {
     axios.get('http://localhost:3000/gestores')
@@ -51,31 +57,111 @@ function Gestores() {
     });
   };
 
+  const handleSortChange = (event) => {
+    setSortCriteria(event.target.value);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handlePageChange = (direction) => {
+    if (direction === 'next') {
+      setCurrentPage(currentPage + 1);
+    } else if (direction === 'prev') {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const sortedAndFilteredGestores = () => {
+    let filteredGestores = gestores.filter(gestor =>
+      gestor.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    switch (sortCriteria) {
+      case 'id_asc':
+        filteredGestores.sort((a, b) => a.id_gestor - b.id_gestor);
+        break;
+      case 'id_desc':
+        filteredGestores.sort((a, b) => b.id_gestor - a.id_gestor);
+        break;
+      case 'name_asc':
+        filteredGestores.sort((a, b) => a.nome.localeCompare(b.nome));
+        break;
+      case 'name_desc':
+        filteredGestores.sort((a, b) => b.nome.localeCompare(a.nome));
+        break;
+      default:
+        break;
+    }
+    return filteredGestores;
+  };
+
+  const paginatedGestores = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return sortedAndFilteredGestores().slice(startIndex, endIndex);
+  };
+
+  const totalPages = Math.ceil(sortedAndFilteredGestores().length / itemsPerPage);
+
   return (
-    <Container className="mt-5">
-      <AreaAdmin/>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 style={{ color: '#164375', fontWeight: 'bold' }}>Gestores</h1>
-        <Link to="/adicionar-gestor">
-          <Button variant="primary">Adicionar Gestor</Button>
-        </Link>
+    <div className="gestores-container">
+      <AreaAdmin />
+      <div className="gestores-header">
+        <h1>Autorizados a Comprar
+          <Link to="/adicionar-gestor">
+            <button className="add-button">
+              <FaPlus />
+            </button>
+          </Link>
+        </h1>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button className="search-button" onClick={() => setSearchTerm('')}>
+            <FaSearch />
+          </button>
+          <select value={sortCriteria} onChange={handleSortChange}>
+            <option value="">Ordenar por</option>
+            <option value="id_asc">ID Crescente</option>
+            <option value="id_desc">ID Decrescente</option>
+            <option value="name_asc">Ordem Alfabética Crescente</option>
+            <option value="name_desc">Ordem Alfabética Decrescente</option>
+          </select>
+        </div>
       </div>
-      <ListGroup>
-        {gestores.map(gestor => (
-          <ListGroup.Item key={gestor.id_gestor} className="d-flex justify-content-between align-items-center">
-            {gestor.nome}
-            <div >
-              <Link to={`/editar-gestor/${gestor.id_gestor}`} className="btn btn-outline-primary me-2">
-                Editar
-              </Link>
-              <Button style={{ margin:'5px' }} variant="outline-danger" onClick={() => handleDelete(gestor.id_gestor)}>
-                Remover
-              </Button>
+      <ul className="gestores-list">
+        {paginatedGestores().map(gestor => (
+          <li key={gestor.id_gestor}>
+            <div className="gestor-info">
+              <div className="primary-info">
+                <p>ID: {gestor.id_gestor}</p>
+                <p>Nome: {gestor.nome}</p>
+              </div>
+              <div className="action-buttons">
+                <button className="delete-button" onClick={() => handleDelete(gestor.id_gestor)}>
+                  <FaTrash />
+                </button>
+              </div>
             </div>
-          </ListGroup.Item>
+          </li>
         ))}
-      </ListGroup>
-    </Container>
+      </ul>
+      <div className="gestores-pagination">
+        <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
+          <FaArrowLeft /> Anterior
+        </button>
+        <span>{currentPage}/{totalPages}</span>
+        <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
+          Próxima <FaArrowRight />
+        </button>
+      </div>
+    </div>
   );
 }
 

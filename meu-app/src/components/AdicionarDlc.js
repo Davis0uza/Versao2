@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/AdicionarDlc.css';
 
 const AdicionarDlc = () => {
   const [nome, setNome] = useState('');
@@ -43,9 +44,11 @@ const AdicionarDlc = () => {
   };
 
   return (
-    <div>
-      <h2>Adicionar DLC</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="adicionar-dlc-container">
+      <div className="adicionar-dlc-header">
+        <h2>Adicionar DLC</h2>
+      </div>
+      <form className="adicionar-dlc-form" onSubmit={handleSubmit}>
         <div>
           <label>Nome:</label>
           <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />

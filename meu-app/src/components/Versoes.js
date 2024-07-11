@@ -2,26 +2,23 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import AreaGestorProdutos from './AreaGestorProdutos'; 
+import AreaGestorProdutos from './AreaGestorProdutos';
+import '../styles/Versoes.css';
+import { FaTrash, FaPlus, FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa';
 
 function Versoes() {
   const [versoes, setVersoes] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortCriteria, setSortCriteria] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   useEffect(() => {
-    const fetchVersoes = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/versoes');
-        setVersoes(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados de versões:", error);
-      }
-    };
-
-    fetchVersoes();
+    axios.get('http://localhost:3000/versoes').then(response => {
+      setVersoes(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de versões:", error);
+    });
   }, []);
 
   const handleDelete = (id) => {
@@ -106,52 +103,59 @@ function Versoes() {
   const totalPages = Math.ceil(sortedAndFilteredVersoes().length / itemsPerPage);
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-3">
-          <AreaGestorProdutos />
+    <div className="versoes-container">
+      <AreaGestorProdutos />
+      <div className="versoes-header">
+        <h1>Versões
+          <Link to="/adicionar-versao">
+            <button className="add-button">
+              <FaPlus />
+            </button>
+          </Link>
+        </h1>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button className="search-button" onClick={() => setSearchTerm('')}>
+            <FaSearch />
+          </button>
+          <select value={sortCriteria} onChange={handleSortChange}>
+            <option value="">Ordenar por</option>
+            <option value="id_asc">ID Crescente</option>
+            <option value="id_desc">ID Decrescente</option>
+            <option value="name_asc">Ordem Alfabética Crescente</option>
+            <option value="name_desc">Ordem Alfabética Decrescente</option>
+          </select>
         </div>
-        <div className="col-md-12">
-          <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
-            <h1 >Versões</h1>
-            <Link to="/adicionar-versao">
-              <button className="btn btn-primary mb-3">Adicionar</button>
-            </Link>
-            <div className="mb-3">
-              <label htmlFor="sortCriteria" className="form-label">Ordenar por:</label>
-              <select id="sortCriteria" className="form-select" value={sortCriteria} onChange={handleSortChange}>
-                <option value="">Nenhum</option>
-                <option value="id_asc">ID Crescente</option>
-                <option value="id_desc">ID Decrescente</option>
-                <option value="name_asc">Ordem Alfabética Crescente</option>
-                <option value="name_desc">Ordem Alfabética Decrescente</option>
-              </select>
+      </div>
+      <ul className="versoes-list">
+        {paginatedVersoes().map(versao => (
+          <li key={versao.id_versao}>
+            <div className="versao-info">
+              <div className="primary-info">
+                <p>ID Versão: {versao.id_versao}, Nome: {versao.nome}</p>
+              </div>
+              <div className="action-buttons">
+                <button className="delete-button" onClick={() => handleDelete(versao.id_versao)}>
+                  <FaTrash />
+                </button>
+              </div>
             </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Pesquisar..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-              <button className="btn btn-secondary mt-2" onClick={() => setSearchTerm('')}>Limpar Pesquisa</button>
-            </div>
-            <ul className="list-group">
-              {paginatedVersoes().map(versao => (
-                <li key={versao.id_versao} className="list-group-item d-flex justify-content-between align-items-center">
-                  ID Versão: {versao.id_versao}, Nome: {versao.nome}
-                  <button onClick={() => handleDelete(versao.id_versao)} className="btn btn-danger">Remover</button>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-3">
-              <button className="btn btn-primary me-2" onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>Anterior</button>
-              <span>{currentPage}/{totalPages}</span>
-              <button className="btn btn-primary ms-2" onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>Próxima</button>
-            </div><br></br>
-          </div>
-        </div>
+          </li>
+        ))}
+      </ul>
+      <div className="versoes-pagination">
+        <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
+          <FaArrowLeft /> Anterior
+        </button>
+        <span>{currentPage}/{totalPages}</span>
+        <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
+          Próxima <FaArrowRight />
+        </button>
       </div>
     </div>
   );

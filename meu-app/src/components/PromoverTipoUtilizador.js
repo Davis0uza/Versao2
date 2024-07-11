@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/PromoverTipoUtilizador.css';
 
 const PromoverTipoUtilizador = () => {
   const [users, setUsers] = useState([]);
@@ -42,11 +43,11 @@ const PromoverTipoUtilizador = () => {
   };
 
   return (
-    <div>
-      <h2>Promover Tipo de Utilizador</h2>
-      <div>
+    <div className="promover-container">
+      <h2 className="promover-title">Promover Tipo de Utilizador</h2>
+      <div className="form-group">
         <label>Usuário:</label>
-        <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
+        <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)} className="form-control">
           <option value="">Selecione um usuário</option>
           {users.map(user => (
             <option key={user.id_user} value={user.id_user}>
@@ -55,9 +56,9 @@ const PromoverTipoUtilizador = () => {
           ))}
         </select>
       </div>
-      <div>
+      <div className="form-group">
         <label>Tipo de Utilizador:</label>
-        <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)}>
+        <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)} className="form-control">
           <option value="">Selecione um tipo de utilizador</option>
           {tiposUtilizador.map(tipo => (
             <option key={tipo.id_tipo} value={tipo.id_tipo}>
@@ -66,7 +67,7 @@ const PromoverTipoUtilizador = () => {
           ))}
         </select>
       </div>
-      <button onClick={handlePromover}>Atualizar Tipo de Utilizador</button>
+      <button onClick={handlePromover} className="btn btn-primary">Atualizar Tipo de Utilizador</button>
     </div>
   );
 };

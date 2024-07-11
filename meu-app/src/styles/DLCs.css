@@ -1,0 +1,155 @@
+/* DLCs.css */
+.dlcs-container {
+    margin-left: 270px; /* Ajuste para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .dlcs-header,
+  .dlcs-pagination {
+    background-color: #164375; /* Azul escuro */
+    padding: 10px;
+    border-radius: 25px; /* Bordas arredondadas */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dlcs-header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dlcs-header .add-button {
+    margin-left: 8px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* Ajustar tamanho do ícone */
+  }
+  
+  .dlcs-header .add-button:hover {
+    background-color: #218838;
+  }
+  
+  .dlcs-header .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dlcs-header input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .dlcs-header button.search-button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .dlcs-header button.search-button:hover {
+    background-color: #1d5a90;
+  }
+  
+  .dlcs-header select {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .dlcs-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Espaçamento entre a barra com título e o primeiro elemento da lista */
+  }
+  
+  .dlcs-list li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 50px; /* Bordas completamente arredondadas */
+    border: 3px solid #164375; /* Borda azul escuro de 3px */
+    margin-bottom: 15px;
+    background-color: #fff;
+  }
+  
+  .dlcs-list li .dlc-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .dlcs-list li .dlc-info .primary-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .dlcs-list li .dlc-info .primary-info p {
+    margin: 0 10px;
+  }
+  
+  .dlcs-list li .action-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dlcs-list li .dlc-info .delete-button {
+    padding: 10px;
+    background-color: #d33;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  
+  .dlcs-list li .dlc-info .delete-button:hover {
+    background-color: #b32424;
+  }
+  
+  .dlcs-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .dlcs-pagination button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Bordas arredondadas */
+  }
+  
+  .dlcs-pagination button:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+  }
+  
+  .dlcs-pagination span {
+    font-weight: bold;
+  }
+  

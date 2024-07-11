@@ -1,0 +1,82 @@
+/* ResponderTicket.css */
+.responder-ticket-container {
+    margin-left: 270px; /* Ajustar para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .responder-ticket-title {
+    color: #164375;
+    font-weight: bold;
+  }
+  
+  .dropdown-container {
+    margin-bottom: 20px;
+  }
+  
+  .ticket-list-container {
+    margin-top: 20px;
+  }
+  
+  .ticket-list-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ticket-list-container li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .ticket-list-container button {
+    margin-top: 10px;
+    background-color: #164375;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .ticket-list-container button:hover {
+    background-color: #0e3b8d;
+  }
+  
+  .responder-ticket-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .responder-ticket-form label {
+    font-weight: bold;
+  }
+  
+  .responder-ticket-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .responder-ticket-form button {
+    margin-top: 20px;
+    background-color: #164375;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .responder-ticket-form button:hover {
+    background-color: #0e3b8d;
+  }
+  

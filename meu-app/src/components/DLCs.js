@@ -2,62 +2,44 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { FaSearch, FaTrash, FaPlus, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import '../styles/DLCs.css';
 import AreaGestorProdutos from './AreaGestorProdutos';
 
-const Dlcs = () => {
+function DLCs() {
   const [dlcs, setDlcs] = useState([]);
-  const [categorias, setCategorias] = useState({});
-  const [versoes, setVersoes] = useState({});
-  const [produtos, setProdutos] = useState({});
+  const [categorias, setCategorias] = useState([]);
+  const [versoes, setVersoes] = useState([]);
+  const [produtos, setProdutos] = useState([]);
   const [sortCriteria, setSortCriteria] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   useEffect(() => {
-    axios.get('http://localhost:3000/produtos/dlcs')
-      .then(response => {
-        setDlcs(response.data);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar DLCs:', error);
-      });
+    axios.get('http://localhost:3000/produtos/dlcs').then(response => {
+      setDlcs(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de DLCs:", error);
+    });
 
-    axios.get('http://localhost:3000/categorias')
-      .then(response => {
-        const categoriasData = response.data.reduce((acc, categoria) => {
-          acc[categoria.id_categoria] = categoria.nome;
-          return acc;
-        }, {});
-        setCategorias(categoriasData);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar categorias:', error);
-      });
+    axios.get('http://localhost:3000/categorias').then(response => {
+      setCategorias(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de categorias:", error);
+    });
 
-    axios.get('http://localhost:3000/versoes')
-      .then(response => {
-        const versoesData = response.data.reduce((acc, versao) => {
-          acc[versao.id_versao] = versao.nome;
-          return acc;
-        }, {});
-        setVersoes(versoesData);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar versões:', error);
-      });
+    axios.get('http://localhost:3000/versoes').then(response => {
+      setVersoes(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de versões:", error);
+    });
 
-    axios.get('http://localhost:3000/produtos')
-      .then(response => {
-        const produtosData = response.data.reduce((acc, produto) => {
-          acc[produto.id_produto] = produto.nome;
-          return acc;
-        }, {});
-        setProdutos(produtosData);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar produtos:', error);
-      });
+    axios.get('http://localhost:3000/produtos').then(response => {
+      setProdutos(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de produtos:", error);
+    });
   }, []);
 
   const handleDelete = (id) => {
@@ -82,7 +64,7 @@ const Dlcs = () => {
             );
           })
           .catch(error => {
-            console.error('Erro ao remover DLC:', error);
+            console.error("Erro ao remover DLC:", error);
             Swal.fire(
               'Erro!',
               'Ocorreu um erro ao remover o DLC.',
@@ -91,6 +73,21 @@ const Dlcs = () => {
           });
       }
     });
+  };
+
+  const getCategoriaNome = (id) => {
+    const categoria = categorias.find(categoria => categoria.id_categoria === id);
+    return categoria ? categoria.nome : 'Desconhecida';
+  };
+
+  const getVersaoNome = (id) => {
+    const versao = versoes.find(versao => versao.id_versao === id);
+    return versao ? versao.nome : 'Desconhecida';
+  };
+
+  const getProdutoNome = (id) => {
+    const produto = produtos.find(produto => produto.id_produto === id);
+    return produto ? produto.nome : 'Desconhecido';
   };
 
   const handleSortChange = (event) => {
@@ -143,44 +140,66 @@ const Dlcs = () => {
   const totalPages = Math.ceil(sortedAndFilteredDlcs().length / itemsPerPage);
 
   return (
-    <div>
-       <AreaGestorProdutos></AreaGestorProdutos>
-      <h1>DLCs</h1>
-      <Link to="/adicionar-dlc">
-        <button>Adicionar</button>
-      </Link>
-      <div>
-        <label>Ordenar por: </label>
-        <select value={sortCriteria} onChange={handleSortChange}>
-          <option value="">Nenhum</option>
-          <option value="id_asc">ID Crescente</option>
-          <option value="id_desc">ID Decrescente</option>
-          <option value="name_asc">Ordem Alfabética Crescente</option>
-          <option value="name_desc">Ordem Alfabética Decrescente</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Pesquisar..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-        <button onClick={() => setSearchTerm('')}>Limpar Pesquisa</button>
+    <div className="dlcs-container">
+      <AreaGestorProdutos />
+      <div className="dlcs-header">
+        <h1>DLCs
+          <Link to="/adicionar-dlcs">
+            <button className="add-button">
+              <FaPlus />
+            </button>
+          </Link>
+        </h1>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+          <button className="search-button" onClick={() => setSearchTerm('')}>
+            <FaSearch />
+          </button>
+          <select value={sortCriteria} onChange={handleSortChange}>
+            <option value="">Ordenar por</option>
+            <option value="id_asc">ID Crescente</option>
+            <option value="id_desc">ID Decrescente</option>
+            <option value="name_asc">Ordem Alfabética Crescente</option>
+            <option value="name_desc">Ordem Alfabética Decrescente</option>
+          </select>
+        </div>
       </div>
-      <ul>
+      <ul className="dlcs-list">
         {paginatedDlcs().map(dlc => (
           <li key={dlc.id_produto}>
-            Nome: {dlc.nome}, Descrição: {dlc.descricao}, Preço: {dlc.preco}, Categoria: {categorias[dlc.id_categoria]}, Versão: {versoes[dlc.id_versao]}, Software: {produtos[dlc.id_produto]}
-            <button onClick={() => handleDelete(dlc.id_produto)}>Remover</button>
+            <div className="dlc-info">
+              <div className="primary-info">
+                <p>ID: {dlc.id_produto}</p>
+                <p>Nome: {dlc.nome}</p>
+                <p>Categoria: {getCategoriaNome(dlc.id_categoria)}</p>
+                <p>Versão: {getVersaoNome(dlc.id_versao)}</p>
+                <p>Software: {getProdutoNome(dlc.id_produto)}</p>
+              </div>
+              <div className="action-buttons">
+                <button className="delete-button" onClick={() => handleDelete(dlc.id_produto)}>
+                  <FaTrash />
+                </button>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
-      <div>
-        <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>Anterior</button>
-        <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>Próxima</button>
+      <div className="dlcs-pagination">
+        <button onClick={() => handlePageChange('prev')} disabled={currentPage === 1}>
+          <FaArrowLeft /> Anterior
+        </button>
         <span>{currentPage}/{totalPages}</span>
+        <button onClick={() => handlePageChange('next')} disabled={currentPage === totalPages}>
+          Próxima <FaArrowRight />
+        </button>
       </div>
     </div>
   );
-};
+}
 
-export default Dlcs;
+export default DLCs;

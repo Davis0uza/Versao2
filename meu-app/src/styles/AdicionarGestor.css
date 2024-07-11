@@ -1,0 +1,125 @@
+/* AdicionarGestor.css */
+.adicionar-gestor-container {
+    margin-left: 270px; /* Ajuste para que não fique atrás do menu lateral */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh; /* Para cobrir a altura completa da página */
+  }
+  
+  .adicionar-gestor-header {
+    background-color: #164375; /* Azul escuro */
+    padding: 10px;
+    border-radius: 25px; /* Bordas arredondadas */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+  }
+  
+  .adicionar-gestor-header h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .adicionar-gestor-header .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .adicionar-gestor-header input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .adicionar-gestor-header button.search-button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .adicionar-gestor-header button.search-button:hover {
+    background-color: #1d5a90;
+  }
+  
+  .adicionar-gestor-header select {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .usuarios-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Espaçamento entre a barra com título e o primeiro elemento da lista */
+  }
+  
+  .usuarios-list li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 50px; /* Bordas completamente arredondadas */
+    border: 3px solid #164375; /* Borda azul escuro de 3px */
+    margin-bottom: 15px;
+    background-color: #fff;
+  }
+  
+  .usuarios-list li .usuario-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .usuarios-list li .usuario-info p {
+    margin: 0 10px;
+  }
+  
+  .usuarios-list li .promote-button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* Ajustar tamanho do ícone */
+    margin-left: 10px;
+  }
+  
+  .usuarios-list li .promote-button:hover {
+    background-color: #218838;
+  }
+  
+  .usuarios-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .usuarios-pagination button {
+    padding: 8px 16px;
+    background-color: #2673b5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px; /* Bordas arredondadas */
+  }
+  
+  .usuarios-pagination button:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+  }
+  
+  .usuarios-pagination span {
+    font-weight: bold;
+  }
+  

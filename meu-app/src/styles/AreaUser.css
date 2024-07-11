@@ -1,13 +1,13 @@
+/* AreaUser.css */
 .menu-lateral {
   width: 250px;
   background-color: #043873;
   color: #fff;
   overflow-y: auto;
   position: fixed;
-  top: 0;
+  top: 105px; /* Ajuste a posição abaixo da Navbar */
   left: 0;
-  height: 100%;
-
+  height: calc(100% - 60px); /* Ajuste a altura para não sobrepor a Navbar */
 }
 
 .menu-lateral ul {
@@ -32,7 +32,7 @@
 .menu-lateral ul li a:hover,
 .menu-lateral ul li:hover {
   background-color: #97BFFF;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 .menu-lateral ul li ul {
@@ -42,7 +42,7 @@
 }
 
 .menu-lateral ul li .submenu.open {
-  display: block;;
+  display: block;
 }
 
 .menu-lateral ul li ul li a {
@@ -54,6 +54,10 @@
   background-color: #8bb5fa;
 }
 
-.menu-item{
+.menu-item {
   margin-left: -28px;
+}
+
+.icon {
+  margin-right: 10px;
 }
