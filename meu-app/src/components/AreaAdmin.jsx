@@ -19,9 +19,9 @@ const MenuLateral = () => {
                 <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
                 <li onClick={() => toggleSubmenu('usuarios')}>
                     <FaUsers className="icon" /> {/* Ícone para Usuários */}
-                    Usuários
+                    Utilizadores
                     <ul className={openSubmenus['usuarios'] ? 'submenu open' : 'submenu'}>
-                        <li><NavLink to="/usuarios">Listar Usuários</NavLink></li>
+                        <li><NavLink to="/usuarios">Listar Utilizadores</NavLink></li>
                     </ul>
                 </li>
                 <li onClick={() => toggleSubmenu('gestores')}>
