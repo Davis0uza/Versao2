@@ -1,0 +1,60 @@
+.menu-lateral {
+    width: 250px;
+    background-color: #043873;
+    color: #fff;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+  
+  }
+  
+  .menu-lateral ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  .menu-lateral ul li {
+    position: relative;
+  }
+  
+  .menu-lateral ul li a,
+  .menu-lateral ul li {
+    display: block;
+    padding: 10px 30px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .menu-lateral ul li a:hover,
+  .menu-lateral ul li:hover {
+    background-color: #97BFFF;
+    border-radius: 10px
+  }
+  
+  .menu-lateral ul li ul {
+    display: none;
+    list-style-type: none;
+    padding-left: 0; /* Remova o padding adicional */
+  }
+  
+  .menu-lateral ul li .submenu.open {
+    display: block;;
+  }
+  
+  .menu-lateral ul li ul li a {
+    padding: 10px 20px; /* Adicione um padding para diferenciar os subitens */
+    color: #ddd;
+  }
+  
+  .menu-lateral ul li ul li a:hover {
+    background-color: #8bb5fa;
+  }
+  
+  .menu-item{
+    margin-left: -28px;
+  }
+  

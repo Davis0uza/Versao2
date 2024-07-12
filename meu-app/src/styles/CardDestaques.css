@@ -1,112 +1,50 @@
 .title-container {
   margin-top: 50px;
-  margin-left: 109px;
+  margin-bottom: 50px;
   color: #043873;
 }
 
-.Cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 100px; /* Add margin on left and right */
-  margin-top: 15px;
-  margin-bottom: 100px;
+/* Adicionando espaço para a barra lateral */
+.main-content {
+  margin-left: 250px; /* Mesma largura da barra lateral */
+  padding: 20px;
 }
 
-.card {
-  margin: 10px;
-  border: 0;
-  box-shadow: 0 4px 8px rgba(4, 1, 167, 0.1); 
-  cursor: pointer;
+.carousel-container{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.card_img {
-  width: 100%; 
-  object-fit:cover;
-  height: 150px;
+.carousel-control-prev-icon.custom-arrow,
+.carousel-control-next-icon.custom-arrow {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: solid #043873;
+  border-width: 0 4px 4px 0;
 }
 
-.categoria{
-  color: #97BFFF;
+.carousel-control-prev-icon.custom-arrow {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }
 
-.card .btn {
-  position: absolute; 
-  bottom: 0px; 
-  right: 0px; 
-  color: #DFFF85;
-  background-color: #043873;
-  font-weight: bold;
+.carousel-control-next-icon.custom-arrow {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: auto;
+  background: none;
   border: none;
-  border-radius: 0;
-  border-bottom-right-radius: 5px; 
 }
 
-.btn-price{
-  margin-right: 50px;
-}
-
-
-.card-body {
-  height: 130px; 
-}
-
-.carousel-container {
-  margin-bottom: 100px;
-}
-
-.carousel-item .row {
-  display: flex;
-  align-items: stretch;
-}
-
-.carousel-item .col-md-12 {
-  display: flex;
-}
-
-.carousel-item .col-md-8,
-.carousel-item .col-md-4 {
-  display: flex;
-  flex-direction: column;
-}
-
-.carousel-item .col-md-8 img {
-  height: 100%;
-  object-fit: cover;
-}
-
-.description {
-  background-color: #043873;
-  color: white;
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-.shopping .md-outline-shopping-cart {
-  font-size: 2.5rem; /* Adjust the size as needed */
-  vertical-align: middle;
-}
-
-.price {
-  position: absolute;
-  bottom: 0;
-  right: 4rem; /* Adjust this value to position the price */
-  margin: 0;
-  padding: 0.5rem;
-  background-color: #1161BF;
-  color: white;
-}
-
-/* Adjust the button styles */
-.shopping {
-  position: absolute;
-  bottom: 0rem; /* Adjust the vertical position */
-  right: 0rem; /* Adjust the horizontal position */
-  background-color: #97BFFF !important;
-  border: none;
-  border-radius: 0;
-  border-bottom-right-radius: 5px;
+.carousel-control-prev span,
+.carousel-control-next span {
+  display: none; 
 }
