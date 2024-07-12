@@ -42,9 +42,9 @@ const CarrinhoGestores = () => {
         </div>
         <div className="col-md-12">
           <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
-            <h2 style={{ color: '#164375', fontWeight: 'bold' }}>Carrinho dos Gestores</h2>
+            <h2 style={{ color: '#164375', fontWeight: 'bold' }}>Carrinho dos Utilizadores</h2>
             <div className="mb-3">
-              <label htmlFor="user" className="form-label">Usuário:</label>
+              <label htmlFor="user" className="form-label">Utilizador:</label>
               <select 
                 id="user" 
                 className="form-select" 
@@ -52,7 +52,7 @@ const CarrinhoGestores = () => {
                 onChange={(e) => setSelectedUser(e.target.value)} 
                 required
               >
-                <option value="">Selecione um usuário</option>
+                <option value="">Selecione um utilizador</option>
                 {users.map(user => (
                   <option key={user.id_user} value={user.id_user}>
                     {user.nome} ({user.id_user})
@@ -65,7 +65,7 @@ const CarrinhoGestores = () => {
               <ul className="list-group">
                 {carrinhos.map(carrinho => (
                   <li key={carrinho.id_carrinho} className="list-group-item">
-                    <p>Usuário: {carrinho.id_user}</p>
+                    <p>Utilizador: {carrinho.id_user}</p>
                     <p>Produtos: {carrinho.produtos}</p>
                     <p>Data: {new Date(carrinho.data).toLocaleDateString()}</p>
                   </li>
