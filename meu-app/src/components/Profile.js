@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal, Image } from 'react-bootstrap';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import '../styles/Profile.css';
 import { AuthContext } from '../context/AuthContext';
 
@@ -9,23 +10,25 @@ const ProfilePage = () => {
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [nif, setNif] = useState('');
   const [morada, setMorada] = useState('');
   const [telemovel, setTelemovel] = useState('');
+  const [fotoperfil, setFotoperfil] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
 
   useEffect(() => {
     if (user && user.id_user) {
       fetch(`http://localhost:3000/users/profile/${user.id_user}`)
         .then(response => response.json())
         .then(data => {
-          console.log(data); // Adicione este log para verificar os dados recebidos
+          console.log(data);
           setName(data.nome || '');
-          setDob(data.datanasc ? data.datanasc.split('T')[0] : ''); // Ajuste para data no formato 'YYYY-MM-DD'
+          setDob(data.datanasc ? data.datanasc.split('T')[0] : '');
           setEmail(data.email || '');
           setNif(data.nif || '');
           setMorada(data.morada || '');
           setTelemovel(data.telemovel || '');
+          setFotoperfil(data.fotoperfil || '');
         })
         .catch(error => console.error('Erro ao obter dados do perfil:', error));
     }
@@ -35,30 +38,31 @@ const ProfilePage = () => {
   const handleEditShow = () => setShowEdit(true);
 
   const handleSaveChanges = () => {
+    const formData = new FormData();
+    formData.append('nome', name);
+    formData.append('datanasc', dob);
+    formData.append('email', email);
+    formData.append('nif', nif);
+    formData.append('morada', morada);
+    formData.append('telemovel', telemovel);
+    if (profileImage) {
+      formData.append('fotoperfil', profileImage);
+    }
+
     fetch(`http://localhost:3000/users/profile/${user.id_user}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        nome: name,
-        datanasc: dob,
-        email: email,
-        password: password,
-        nif: nif,
-        morada: morada,
-        telemovel: telemovel
-      }),
+      body: formData,
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data); // Adicione este log para verificar os dados recebidos após a atualização
+        console.log(data);
         setName(data.nome || '');
-        setDob(data.datanasc ? data.datanasc.split('T')[0] : ''); // Ajuste para data no formato 'YYYY-MM-DD'
+        setDob(data.datanasc ? data.datanasc.split('T')[0] : '');
         setEmail(data.email || '');
         setNif(data.nif || '');
         setMorada(data.morada || '');
         setTelemovel(data.telemovel || '');
+        setFotoperfil(data.fotoperfil || '');
         setShowEdit(false);
       })
       .catch(error => console.error('Erro ao atualizar dados do perfil:', error));
@@ -67,6 +71,9 @@ const ProfilePage = () => {
   return (
     <Container className="d-flex flex-column container">
       <div className="profile-box p-4 rounded">
+        <div className="text-center mb-4">
+          <Image src={fotoperfil ? `http://localhost:3000/uploads/${fotoperfil}` : '/default-profile.png'} roundedCircle className="profile-image" />
+        </div>
         <Row className="mb-3">
           <Col>
             <h5 className="mb-2">Nome</h5>
@@ -97,16 +104,10 @@ const ProfilePage = () => {
             <Form.Label className="label-style">{morada}</Form.Label>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <h5 className="mb-2">Palavra Passe</h5>
-            <Form.Label className="label-style">{'*'.repeat(password.length)}</Form.Label>
-          </Col>
-        </Row>
       </div>
       <div className="button-group">
-        <Button variant="primary" onClick={handleEditShow} className="edit-button small-button">Editar Perfil</Button>
-        <Button variant="danger" onClick={() => window.confirm('Tem certeza de que deseja apagar a conta? Esta ação não pode ser desfeita.') && console.log('Conta Apagada')} className="delete-button small-button">Apagar Conta</Button>
+        <Button variant="primary" onClick={handleEditShow} className="icon-button"><FaEdit /></Button>
+        <Button variant="danger" onClick={() => window.confirm('Tem certeza de que deseja apagar a conta? Esta ação não pode ser desfeita.') && console.log('Conta Apagada')} className="icon-button red-button"><FaTrash /></Button>
       </div>
 
       <Modal show={showEdit} onHide={handleEditClose}>
@@ -139,9 +140,9 @@ const ProfilePage = () => {
               <Form.Label>Morada</Form.Label>
               <Form.Control type="text" value={morada} onChange={(e) => setMorada(e.target.value)} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formPassword">
-              <Form.Label>Palavra Passe</Form.Label>
-              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Form.Group className="mb-3" controlId="formProfileImage">
+              <Form.Label>Foto de Perfil</Form.Label>
+              <Form.Control type="file" onChange={(e) => setProfileImage(e.target.files[0])} />
             </Form.Group>
           </Form>
         </Modal.Body>
