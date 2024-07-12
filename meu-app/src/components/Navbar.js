@@ -167,6 +167,7 @@ const AdminMenu = () => {
           Vendas
           <ul className={openSubmenus['vendas'] ? 'submenu open' : 'submenu'}>
             <li><NavLink to="/carrinho">Carrinho</NavLink></li>
+            <li><NavLink to="/dashboard">Dashboard de Vendas</NavLink></li>
           </ul>
         </li>
       </ul>
@@ -271,8 +272,16 @@ const GestorMenu = () => {
             </div>
           </NavLink>
         </li>
+        <li onClick={() => toggleSubmenu('vendas')}>
+          <FaShoppingCart  className="icon" /> {/* Ícone para Gestores */}
+          Vendas
+          <ul className={openSubmenus['vendas'] ? 'submenu open' : 'submenu'}>
+            <li><NavLink to="/carrinho">Carrinho</NavLink></li>
+            <li><NavLink to="/dashboard">Dashboard de Vendas</NavLink></li>
+          </ul>
+        </li>
         <li>
-          <NavLink to="/perfil" className="menu-link">
+          <NavLink to="/profile" className="menu-link">
             <div className="menu-item">
               <FaUser className="icon" /> {/* Ícone para Perfil */}
               Perfil

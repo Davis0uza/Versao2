@@ -5,7 +5,7 @@ const router = express.Router();
 const Produto = require('../models/produto');
 const Versao = require('../models/versao');
 const multer = require('multer');
-const Sequelize = require('sequelize'); // Certifique-se de importar o Sequelize
+const Sequelize = require('sequelize'); 
 
 // Certifique-se de que o diretório 'src/uploads' existe no backend
 const uploadDir = path.join(__dirname, '../src/uploads');
@@ -272,6 +272,86 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro ao atualizar produto' });
   }
 });
+
+// Rota GET para listar produtos não DLCs e sem gestor
+router.get('/sem-gestor-e-sem-dlc', async (req, res) => {
+  try {
+    const produtos = await Produto.findAll({
+      where: {
+        id_gestor: null,
+        Iddlc: null
+      }
+    });
+    res.json(produtos);
+  } catch (error) {
+    console.error('Erro ao buscar produtos não DLCs e sem gestor:', error);
+    res.status(500).json({ error: 'Erro ao buscar produtos não DLCs e sem gestor' });
+  }
+});
+
+// Rota GET para listar produtos únicos (não repetidos) com base no nome
+router.get('/produtos-unicos', async (req, res) => {
+  try {
+    const produtos = await Produto.findAll({
+      attributes: [
+        [Sequelize.fn('MIN', Sequelize.col('id_produto')), 'id_produto'],
+        'nome'
+      ],
+      group: ['nome'],
+      order: ['nome']
+    });
+    res.json(produtos);
+  } catch (error) {
+    console.error("Erro ao buscar produtos únicos:", error);
+    res.status(500).json({ error: 'Erro ao buscar produtos únicos' });
+  }
+});
+
+// Rota POST para adicionar DLC
+router.post('/adicionar-dlc', async (req, res) => {
+  const { nome, descricao, preco, id_categoria, versao, Iddlc } = req.body;
+  let transaction;
+
+  try {
+    // Inicia uma transação
+    transaction = await Produto.sequelize.transaction();
+
+    // Cria o DLC com um id_versao temporário
+    const novoDlc = await Produto.create({
+      nome,
+      descricao,
+      preco,
+      id_categoria,
+      id_versao: 1, // id_versao temporário
+      id_gestor: null,
+      Iddlc: Iddlc // Atribui o id do produto pai
+    }, { transaction });
+
+    // Cria a versão associada ao DLC
+    const novaVersao = await Versao.create({
+      nome: versao,
+      id_produto: novoDlc.id_produto
+    }, { transaction });
+
+    // Atualiza o DLC com o id_versao correto
+    await Produto.update(
+      { id_versao: novaVersao.id_versao },
+      { where: { id_produto: novoDlc.id_produto }, transaction }
+    );
+
+    // Confirma a transação
+    await transaction.commit();
+
+    // Recupera o DLC atualizado para retorno
+    const dlcAtualizado = await Produto.findByPk(novoDlc.id_produto);
+    res.status(201).json(dlcAtualizado);
+  } catch (error) {
+    if (transaction) await transaction.rollback();
+    console.error('Erro ao adicionar DLC:', error);
+    res.status(500).json({ error: 'Erro ao adicionar DLC' });
+  }
+});
+
 
 
 module.exports = router;

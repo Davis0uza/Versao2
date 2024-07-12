@@ -1,0 +1,90 @@
+/* Dashboard.css */
+
+.dashboard-container {
+    padding: 20px;
+    margin-top: 60px; /* Espaço para a navbar */
+    margin-left: 250px; /* Espaço para o menu lateral */
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-container h2{
+    color: #043873;
+  }
+  
+  .dashboard-left {
+    width: 60%; /* Ajuste conforme necessário */
+    padding-right: 20px;
+  }
+  
+  .dashboard-right {
+    width: 40%; /* Ajuste conforme necessário */
+    
+  }
+  
+  .chart-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .card-container {
+    background-color: #043873;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .card-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .card-container .h8 {
+    margin-top: 10px;
+  }
+  
+  .carrinho-list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carrinho-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  

@@ -5,7 +5,7 @@
   color: #fff;
   overflow-y: auto;
   position: fixed;
-  top: 105px; /* Ajuste a posição abaixo da Navbar */
+  top: 112px; /* Ajuste a posição abaixo da Navbar */
   left: 0;
   height: calc(100% - 60px); /* Ajuste a altura para não sobrepor a Navbar */
 }

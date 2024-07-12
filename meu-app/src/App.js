@@ -33,10 +33,12 @@ import Cards_destaques from './components/CadsDestaques';
 import Contactos from './components/Contactos';
 import Register from './components/Register';
 import Sobre from './components/Sobre';
+import Dashboard from './components/Dashboard';
 import './App.css';
 import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -112,6 +114,7 @@ function App() {
           <Route path="/contactos" element={<Contactos />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </AuthProvider>

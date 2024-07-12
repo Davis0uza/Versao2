@@ -13,7 +13,7 @@ function AdicionarVersao() {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/produtos');
+        const response = await axios.get('http://localhost:3000/produtos/produtos-unicos');
         setProdutos(response.data);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -26,13 +26,19 @@ function AdicionarVersao() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const novaVersao = await axios.post('http://localhost:3000/versoes', {
+      const produtoSelecionado = produtos.find(produto => produto.id_produto === parseInt(idProduto));
+      const nomeProduto = produtoSelecionado.nome;
+
+      // Adicionar nova versão
+      const novaVersaoResponse = await axios.post('http://localhost:3000/versoes/nova-versao', {
         nome,
         id_produto: idProduto
       });
 
-      await axios.put(`http://localhost:3000/produtos/${idProduto}`, {
-        id_versao: novaVersao.data.id_versao
+      // Atualizar produtos com o mesmo nome e id_gestor null para a nova versão
+      await axios.put('http://localhost:3000/versoes/atualizar-produtos', {
+        nome: nomeProduto,
+        id_versao: novaVersaoResponse.data.id_versao
       });
 
       navigate('/versoes');
@@ -47,8 +53,8 @@ function AdicionarVersao() {
         <div className="col-md-3">
           <MenuLateral />
         </div>
-        <div className="col-md-12 ">
-          <div className="content-wrapper"> {/* Wrapper para o conteúdo */}
+        <div className="col-md-9">
+          <div className="content-wrapper">
             <h1>Adicionar Versão</h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -61,7 +67,7 @@ function AdicionarVersao() {
                   <option value="">Selecione um produto</option>
                   {produtos.map(produto => (
                     <option key={produto.id_produto} value={produto.id_produto}>
-                      {produto.id_produto} - {produto.nome}
+                      {produto.nome}
                     </option>
                   ))}
                 </select>

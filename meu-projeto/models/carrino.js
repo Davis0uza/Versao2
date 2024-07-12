@@ -16,7 +16,7 @@ const Carrino = sequelize.define('Carrino', {
     type: DataTypes.DATE,
     allowNull: true
   },
-  produtos: { // Nova coluna
+  produtos: { 
     type: DataTypes.STRING, 
     allowNull: true
   }

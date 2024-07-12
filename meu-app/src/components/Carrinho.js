@@ -12,7 +12,7 @@ function Carrinho() {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    axios.get('http://localhost:3000/carrino')
+    axios.get('http://localhost:3000/carrino/all')
       .then(response => {
         setCarrinho(response.data);
       })

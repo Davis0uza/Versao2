@@ -11,6 +11,7 @@ function Versoes() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortCriteria, setSortCriteria] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [produtos, setProdutos] = useState([]);
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -19,7 +20,19 @@ function Versoes() {
     }).catch(error => {
       console.error("Erro ao buscar dados de versões:", error);
     });
+
+    axios.get('http://localhost:3000/produtos/all').then(response => {
+      setProdutos(response.data);
+    }).catch(error => {
+      console.error("Erro ao buscar dados de produtos:", error);
+    });
+
   }, []);
+
+  const getProdutoNome = (id) => {
+    const produto = produtos.find(produto => produto.id_produto === id);
+    return produto ? produto.nome : "ELEMINADO";
+  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -138,6 +151,7 @@ function Versoes() {
             <div className="versao-info">
               <div className="primary-info">
                 <p>ID Versão: {versao.id_versao}, Nome: {versao.nome}</p>
+                <p>Software: {getProdutoNome(versao.id_produto)}</p>
               </div>
               <div className="action-buttons">
                 <button className="delete-button" onClick={() => handleDelete(versao.id_versao)}>

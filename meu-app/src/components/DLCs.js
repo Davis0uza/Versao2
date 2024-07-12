@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { FaSearch, FaTrash, FaPlus, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaSearch, FaTrash, FaChevronDown, FaChevronUp, FaPlus, FaEdit, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import '../styles/DLCs.css';
 import AreaGestorProdutos from './AreaGestorProdutos';
 
@@ -14,7 +14,9 @@ function DLCs() {
   const [sortCriteria, setSortCriteria] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [expandedDlc, setExpandedDlc] = useState(null);
   const itemsPerPage = 5;
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:3000/produtos/dlcs').then(response => {
@@ -35,7 +37,7 @@ function DLCs() {
       console.error("Erro ao buscar dados de versões:", error);
     });
 
-    axios.get('http://localhost:3000/produtos').then(response => {
+    axios.get('http://localhost:3000/produtos/all').then(response => {
       setProdutos(response.data);
     }).catch(error => {
       console.error("Erro ao buscar dados de produtos:", error);
@@ -87,7 +89,7 @@ function DLCs() {
 
   const getProdutoNome = (id) => {
     const produto = produtos.find(produto => produto.id_produto === id);
-    return produto ? produto.nome : 'Desconhecido';
+    return produto ? produto.nome : id;
   };
 
   const handleSortChange = (event) => {
@@ -104,6 +106,14 @@ function DLCs() {
     } else if (direction === 'prev') {
       setCurrentPage(currentPage - 1);
     }
+  };
+
+  const toggleExpand = (id) => {
+    setExpandedDlc(expandedDlc === id ? null : id);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/editarproduto/${id}`);
   };
 
   const sortedAndFilteredDlcs = () => {
@@ -144,7 +154,7 @@ function DLCs() {
       <AreaGestorProdutos />
       <div className="dlcs-header">
         <h1>DLCs
-          <Link to="/adicionar-dlcs">
+          <Link to="/adicionar-dlc">
             <button className="add-button">
               <FaPlus />
             </button>
@@ -171,20 +181,31 @@ function DLCs() {
       </div>
       <ul className="dlcs-list">
         {paginatedDlcs().map(dlc => (
-          <li key={dlc.id_produto}>
+          <li key={dlc.id_produto} className={expandedDlc === dlc.id_produto ? 'expanded' : ''}>
             <div className="dlc-info">
               <div className="primary-info">
+                <img src={`http://localhost:3000/uploads/${dlc.fotodlc}`} alt={dlc.nome} />
                 <p>ID: {dlc.id_produto}</p>
                 <p>Nome: {dlc.nome}</p>
                 <p>Categoria: {getCategoriaNome(dlc.id_categoria)}</p>
-                <p>Versão: {getVersaoNome(dlc.id_versao)}</p>
-                <p>Software: {getProdutoNome(dlc.id_produto)}</p>
+                <button className="toggle-button" onClick={() => toggleExpand(dlc.id_produto)}>
+                  {expandedDlc === dlc.id_produto ? <FaChevronUp /> : <FaChevronDown />}
+                </button>
               </div>
               <div className="action-buttons">
+                <button className="edit-button" onClick={() => handleEdit(dlc.id_produto)}>
+                  <FaEdit />
+                </button>
                 <button className="delete-button" onClick={() => handleDelete(dlc.id_produto)}>
                   <FaTrash />
                 </button>
               </div>
+            </div>
+            <div className="additional-info">
+              <p>Descrição: {dlc.descricao}</p>
+              <p>Preço: {dlc.preco}€</p>
+              <p>Versão: {getVersaoNome(dlc.id_versao)}</p>
+              <p>Software: {getProdutoNome(dlc.id_produto)}</p>
             </div>
           </li>
         ))}
