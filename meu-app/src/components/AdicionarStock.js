@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AreaGestorProdutos from './AreaGestorProdutos'; 
+import Swal from 'sweetalert2';
+import AreaGestorProdutos from './AreaGestorProdutos';
 
 const AdicionarStock = () => {
   const [produtos, setProdutos] = useState([]);
@@ -28,16 +29,40 @@ const AdicionarStock = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post('http://localhost:3000/produtos/addStock', {
-        id_produto: produtoSelecionado,
-        quantidade: parseInt(quantidade, 10)
-      });
-      // Reset the form or show success message
-      console.log('Estoque adicionado com sucesso');
-    } catch (error) {
-      console.error('Erro ao adicionar estoque:', error);
-    }
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Você deseja adicionar o estoque?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, adicionar!',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.post('http://localhost:3000/produtos/addStock', {
+            id_produto: produtoSelecionado,
+            quantidade: parseInt(quantidade, 10)
+          });
+          Swal.fire(
+            'Adicionado!',
+            'O estoque foi adicionado com sucesso.',
+            'success'
+          );
+          // Reset the form
+          setProdutoSelecionado('');
+          setQuantidade(0);
+        } catch (error) {
+          console.error('Erro ao adicionar estoque:', error);
+          Swal.fire(
+            'Erro!',
+            'Houve um problema ao adicionar o estoque.',
+            'error'
+          );
+        }
+      }
+    });
   };
 
   return (
