@@ -33,7 +33,6 @@ const ListarRespostas = () => {
             {tickets.map(ticket => (
               <li key={ticket.id_ticket}>
                 <strong>Descrição:</strong> {ticket.descricao}<br />
-                <strong>Resposta:</strong> {ticket.resposta}
               </li>
             ))}
           </ul>

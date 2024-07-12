@@ -48,7 +48,6 @@ router.get('/checkAuth', (req, res) => {
   }
 });
 
-
 // Rota para registrar usuário
 router.post('/register', async (req, res) => {
   try {
@@ -91,12 +90,12 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 // Rota GET para listar users
 router.get('/', async (req, res) => {
   const users = await User.findAll();
   res.json(users);
 });
-
 
 // Rota para atualizar o tipo de utilizador de um usuário
 router.put('/:id', async (req, res) => {
@@ -121,7 +120,7 @@ router.put('/editar/:id', upload.single('fotoperfil'), async (req, res) => {
   const { id } = req.params;
   const { nome, datanasc, telemovel, email, id_tipo, nif, morada } = req.body;
   const fotoperfil = req.file ? req.file.filename : null;
-  
+
   try {
     const user = await User.findByPk(id);
     if (user) {
@@ -153,6 +152,49 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     console.error("Erro ao remover usuário:", error);
     res.status(500).send({ error: 'Erro ao remover usuário' });
+  }
+});
+
+// Rota para obter dados do perfil do utilizador logado
+router.get('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error('Erro ao obter dados do perfil:', error);
+    res.status(500).json({ error: 'Erro ao obter dados do perfil' });
+  }
+});
+
+// Rota para atualizar os dados do perfil do utilizador logado
+router.put('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nome, datanasc, telemovel, email, nif, morada, password } = req.body;
+
+  try {
+    const user = await User.findByPk(id);
+    if (user) {
+      user.nome = nome;
+      user.datanasc = datanasc;
+      user.telemovel = telemovel;
+      user.email = email;
+      user.nif = nif;
+      user.morada = morada;
+      if (password) {
+        user.password = await bcrypt.hash(password, 10); // Certifique-se de que bcrypt está importado
+      }
+      await user.save();
+      res.json(user);
+    } else {
+      res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+  } catch (error) {
+    console.error('Erro ao atualizar dados do perfil:', error);
+    res.status(500).json({ error: 'Erro ao atualizar dados do perfil' });
   }
 });
 

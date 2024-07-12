@@ -34,6 +34,7 @@ import Contactos from './components/Contactos';
 import Register from './components/Register';
 import Sobre from './components/Sobre';
 import Dashboard from './components/Dashboard';
+import HistoricoCompras from './components/HistoricoCompras';
 import './App.css';
 import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
@@ -115,6 +116,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/historico" element={<HistoricoCompras />} />
         </Routes>
       </div>
     </AuthProvider>

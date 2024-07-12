@@ -131,7 +131,7 @@ function Usuarios() {
       <div className="usuarios-container">
         <div className="usuarios-header">
           <h1>Users
-            <Link to="/adicionar-usuario">
+            <Link to="/register">
               <button className="add-button">
                 <FaPlus />
               </button>

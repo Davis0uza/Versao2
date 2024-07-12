@@ -170,6 +170,14 @@ const AdminMenu = () => {
             <li><NavLink to="/dashboard">Dashboard de Vendas</NavLink></li>
           </ul>
         </li>
+        <li>
+          <NavLink to="/profile" className="menu-link">
+            <div className="menu-item">
+              <FaUser className="icon" /> {/* Ícone para Perfil */}
+              <span className="menu-text">Perfil</span>
+            </div>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
@@ -205,7 +213,7 @@ const UserMenu = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/carrinho-gestores" className="menu-link">
+          <NavLink to="/historico" className="menu-link">
             <div className="menu-item">
               <FaHistory className="icon" /> {/* Ícone para Perfil */}
               Histórico  de Compras
@@ -213,7 +221,7 @@ const UserMenu = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/perfil" className="menu-link">
+          <NavLink to="/profile" className="menu-link">
             <div className="menu-item">
               <FaUser className="icon" /> {/* Ícone para Perfil */}
               <span className="menu-text">Perfil</span>
